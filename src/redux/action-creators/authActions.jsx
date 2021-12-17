@@ -33,13 +33,13 @@ const logoutSuccess = () => ({
 });
 
 const login = (user) => {
-  console.log("http://node-khambenh.herokuapp.com/api/auth/login");
+  console.log("https://node-khambenh.herokuapp.com/api/auth/login");
   return async (dispatch) => {
     dispatch(loginStart());
-    console.log("http://node-khambenh.herokuapp.com/api/auth/login1");
+    console.log("https://node-khambenh.herokuapp.com/api/auth/login1");
     try {
       const res = await axios.post(
-        "http://node-khambenh.herokuapp.com/api/auth/login",
+        "https://node-khambenh.herokuapp.com/api/auth/login",
         user
       );
       localStorage.setItem("user", JSON.stringify(res.data));
@@ -64,7 +64,7 @@ const register = (user) => {
     dispatch(registerStart());
     try {
       const res = await axios.post(
-        "http://node-khambenh.herokuapp.com/api/auth/register",
+        "https://node-khambenh.herokuapp.com/api/auth/register",
         user
       );
       localStorage.setItem("user", JSON.stringify(res.data));
