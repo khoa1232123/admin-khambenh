@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "src/helpers/axios";
 import { khoaTypes } from "../types";
 
 // Get All Posts
@@ -16,13 +16,10 @@ const getKhoasFailure = () => ({
 });
 
 const getKhoas = () => {
-  return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
+  return async (dispatch) => {
     dispatch(getKhoasStart());
     try {
-      const res = await axios.get("/khoa", configAxios);
+      const res = await axios.get("/khoa");
 
       console.log(res.data);
 
@@ -48,13 +45,10 @@ const getKhoaFailure = () => ({
 });
 
 const getKhoa = (id) => {
-  return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
+  return async (dispatch) => {
     dispatch(getKhoaStart());
     try {
-      const res = await axios.get("/khoa/" + id, configAxios);
+      const res = await axios.get("/khoa/" + id);
 
       dispatch(getKhoaSuccess(res.data));
     } catch (error) {
@@ -80,13 +74,12 @@ const createKhoaFailure = () => ({
 const createKhoa = (khoa) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       khoa: { khoas },
     } = getState();
     console.log(getState());
     dispatch(createKhoaStart());
     try {
-      const res = await axios.post("/khoa", khoa, configAxios);
+      const res = await axios.post("/khoa", khoa);
       console.log(res);
 
       dispatch(createKhoaSuccess([res.data, ...khoas]));
@@ -113,12 +106,11 @@ const deleteKhoaFailure = () => ({
 const deleteKhoa = (khoa) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       khoa: { khoas },
     } = getState();
     dispatch(deleteKhoaStart());
     try {
-      await axios.delete("/khoa/" + khoa._id, configAxios);
+      await axios.delete("/khoa/" + khoa._id);
       const newkhoas = khoas.filter((item) => item._id !== khoa._id);
       dispatch(deleteKhoaSuccess(newkhoas));
     } catch (error) {
@@ -146,12 +138,11 @@ const updateKhoa = (khoa) => {
   console.log(khoa);
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       khoa: { khoas },
     } = getState();
     dispatch(updateKhoaStart());
     try {
-      const res = await axios.put("/khoa/" + khoa._id, khoa, configAxios);
+      const res = await axios.put("/khoa/" + khoa._id, khoa);
       console.log(res);
 
       let index = khoas.findIndex((item) => item._id === khoa._id);

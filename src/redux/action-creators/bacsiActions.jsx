@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "src/helpers/axios";
 import { bacsiTypes } from "../types";
 
 // Get All Posts
@@ -16,13 +16,10 @@ const getBacsisFailure = () => ({
 });
 
 const getBacsis = () => {
-  return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
+  return async (dispatch) => {
     dispatch(getBacsisStart());
     try {
-      const res = await axios.get("/bacsi", configAxios);
+      const res = await axios.get("/bacsi");
 
       console.log(res.data);
 
@@ -49,12 +46,9 @@ const getBacsiFailure = () => ({
 
 const getBacsi = (id) => {
   return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
     dispatch(getBacsiStart());
     try {
-      const res = await axios.get("/bacsi/" + id, configAxios);
+      const res = await axios.get("/bacsi/" + id);
 
       dispatch(getBacsiSuccess(res.data));
     } catch (error) {
@@ -80,12 +74,11 @@ const createBacsiFailure = () => ({
 const createBacsi = (bacsi) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       bacsi: { bacsis },
     } = getState();
     dispatch(createBacsiStart());
     try {
-      const res = await axios.post("/bacsi", bacsi, configAxios);
+      const res = await axios.post("/bacsi", bacsi);
       console.log(res);
 
       dispatch(createBacsiSuccess([res.data, ...bacsis]));
@@ -113,12 +106,11 @@ const deleteBacsi = (bacsi) => {
   return async (dispatch, getState) => {
     console.log("abc bacsi");
     const {
-      option: { configAxios },
       bacsi: { bacsis },
     } = getState();
     dispatch(deleteBacsiStart());
     try {
-      await axios.delete("/bacsi/" + bacsi._id, configAxios);
+      await axios.delete("/bacsi/" + bacsi._id);
       console.log("delete success");
       const newBacsis = bacsis.filter((item) => item._id !== bacsi._id);
       dispatch(deleteBacsiSuccess(newBacsis));
@@ -146,12 +138,11 @@ const updateBacsiFailure = () => ({
 const updateBacsi = (bacsi) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       bacsi: { bacsis },
     } = getState();
     dispatch(updateBacsiStart());
     try {
-      const res = await axios.put("/bacsi/" + bacsi._id, bacsi, configAxios);
+      const res = await axios.put("/bacsi/" + bacsi._id, bacsi);
       console.log(res);
 
       let index = bacsis.findIndex((item) => item._id === bacsi._id);

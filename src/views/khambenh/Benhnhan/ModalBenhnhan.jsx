@@ -13,9 +13,8 @@ import {
   CSelect,
 } from "@coreui/react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { randomMaso } from "src/helpers";
-import { renderKhoa } from "src/helpers/renderKhoa";
 import {
   createBenhnhan,
   getBenhnhans,
@@ -25,8 +24,6 @@ import {
 
 const ModalBenhnhan = ({ modal, setModal, oldBenhnhan }) => {
   const dispatch = useDispatch();
-
-  const { khoas } = useSelector((state) => state.khoa);
 
   useEffect(() => {
     dispatch(getBenhnhans());

@@ -90,5 +90,5 @@
     "node": ">=10",
     "npm": ">=6"
   },
-  "proxy": "http://node-khambenh.herokuapp.com/api"
+  "proxy": "https://node-khambenh.herokuapp.com/api"
 }

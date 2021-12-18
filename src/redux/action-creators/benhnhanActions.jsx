@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "src/helpers/axios";
 import { benhnhanTypes } from "../types";
 
 // Get All Posts
@@ -16,13 +16,10 @@ const getBenhnhansFailure = () => ({
 });
 
 const getBenhnhans = () => {
-  return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
+  return async (dispatch) => {
     dispatch(getBenhnhansStart());
     try {
-      const res = await axios.get("/hosobenhnhan", configAxios);
+      const res = await axios.get("/hosobenhnhan");
 
       console.log(res.data);
 
@@ -48,13 +45,10 @@ const getBenhnhanFailure = () => ({
 });
 
 const getBenhnhan = (id) => {
-  return async (dispatch, getState) => {
-    const {
-      option: { configAxios },
-    } = getState();
+  return async (dispatch) => {
     dispatch(getBenhnhanStart());
     try {
-      const res = await axios.get("/hosobenhnhan/" + id, configAxios);
+      const res = await axios.get("/hosobenhnhan/" + id);
 
       dispatch(getBenhnhanSuccess(res.data));
     } catch (error) {
@@ -80,12 +74,11 @@ const createBenhnhanFailure = () => ({
 const createBenhnhan = (benhnhan) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       benhnhan: { benhnhans },
     } = getState();
     dispatch(createBenhnhanStart());
     try {
-      const res = await axios.post("/hosobenhnhan", benhnhan, configAxios);
+      const res = await axios.post("/hosobenhnhan", benhnhan);
       console.log(res);
 
       dispatch(createBenhnhanSuccess([res.data, ...benhnhans]));
@@ -113,12 +106,11 @@ const deleteBenhnhan = (benhnhan) => {
   return async (dispatch, getState) => {
     console.log("abc benhnhan");
     const {
-      option: { configAxios },
       benhnhan: { benhnhans },
     } = getState();
     dispatch(deleteBenhnhanStart());
     try {
-      await axios.delete("/hosobenhnhan/" + benhnhan._id, configAxios);
+      await axios.delete("/hosobenhnhan/" + benhnhan._id);
       console.log("delete success");
       const newBenhnhans = benhnhans.filter(
         (item) => item._id !== benhnhan._id
@@ -148,16 +140,11 @@ const updateBenhnhanFailure = () => ({
 const updateBenhnhan = (benhnhan) => {
   return async (dispatch, getState) => {
     const {
-      option: { configAxios },
       benhnhan: { benhnhans },
     } = getState();
     dispatch(updateBenhnhanStart());
     try {
-      const res = await axios.put(
-        "/hosobenhnhan/" + benhnhan._id,
-        benhnhan,
-        configAxios
-      );
+      const res = await axios.put("/hosobenhnhan/" + benhnhan._id, benhnhan);
       console.log(res);
 
       let index = benhnhans.findIndex((item) => item._id === benhnhan._id);
