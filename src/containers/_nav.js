@@ -18,6 +18,12 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Phiếu đăng ký khám bệnh",
+    to: "/khambenh/phieudangkykhambenh",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Bệnh nhân",
     to: "/khambenh/benhnhan",
     icon: "cil-drop",

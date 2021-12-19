@@ -14,7 +14,19 @@ const formatDate = (date) => {
   if (month.length < 2) month = "0" + month;
   if (day.length < 2) day = "0" + day;
 
-  return [day, month, year].join(" - ");
+  return [day, month, year].join("/");
+};
+
+const formatInputDate = (date) => {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
 };
 
 const renderGioitinh = () => {
@@ -27,4 +39,4 @@ const renderGioitinh = () => {
   return data;
 };
 
-export { randomMaso, formatDate, renderGioitinh };
+export { randomMaso, formatDate, renderGioitinh, formatInputDate };

@@ -14,14 +14,11 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { formatInputDate } from "src/helpers";
+import { formatDate } from "src/helpers";
 import { randomMaso } from "src/helpers";
-import { renderKhoa } from "src/helpers/renderKhoa";
-import {
-  createBacsi,
-  getBacsis,
-  getKhoas,
-  updateBacsi,
-} from "src/redux/action-creators";
+import { renderOptions } from "src/helpers/renderOptions";
+import { createBacsi, getKhoas, updateBacsi } from "src/redux/action-creators";
 
 const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
   const dispatch = useDispatch();
@@ -29,7 +26,6 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
   const { khoas } = useSelector((state) => state.khoa);
 
   useEffect(() => {
-    dispatch(getBacsis());
     dispatch(getKhoas());
   }, [dispatch]);
 
@@ -148,7 +144,7 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
                 type="date"
                 name="ngaysinh"
                 placeholder="Ngày sinh"
-                value={bacsi.ngaysinh || ""}
+                value={formatInputDate(bacsi.ngaysinh) || ""}
                 onChange={handleChange}
               />
             </CCol>
@@ -178,7 +174,7 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
                 value={bacsi.khoa || ""}
                 onChange={handleChange}
               >
-                {renderKhoa(khoas)}
+                {renderOptions(khoas)}
               </CSelect>
             </CCol>
           </CFormGroup>

@@ -146,7 +146,7 @@ const updateBacsi = (bacsi) => {
       console.log(res);
 
       let index = bacsis.findIndex((item) => item._id === bacsi._id);
-      bacsis[index] = bacsi;
+      bacsis[index] = res.data;
 
       dispatch(updateBacsiSuccess(bacsis));
     } catch (error) {
