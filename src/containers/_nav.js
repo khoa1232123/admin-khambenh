@@ -24,6 +24,12 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Phiếu xuất nhập viện",
+    to: "/khambenh/phieuxuatnhapvien",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Bệnh nhân",
     to: "/khambenh/benhnhan",
     icon: "cil-drop",

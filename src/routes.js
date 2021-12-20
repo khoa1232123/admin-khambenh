@@ -69,6 +69,7 @@ const Bacsi = React.lazy(() => import("./views/khambenh/Bacsi"));
 const Khoa = React.lazy(() => import("./views/khambenh/Khoa"));
 const Benhnhan = React.lazy(() => import("./views/khambenh/Benhnhan"));
 const Pdkkb = React.lazy(() => import("./views/khambenh/Pdkkb"));
+const Pxnv = React.lazy(() => import("./views/khambenh/Pxnv"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
@@ -193,6 +194,12 @@ const routes = [
     exact: true,
     name: "Phiếu đăng ký khám bệnh",
     component: Pdkkb,
+  },
+  {
+    path: "/khambenh/phieuxuatnhapvien",
+    exact: true,
+    name: "Phiếu xuất nhập viện",
+    component: Pxnv,
   },
 ];
 

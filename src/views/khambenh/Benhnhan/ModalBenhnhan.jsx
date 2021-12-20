@@ -14,7 +14,7 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { randomMaso } from "src/helpers";
+import { formatInputDate, randomMaso } from "src/helpers";
 import {
   createBenhnhan,
   getBenhnhans,
@@ -144,7 +144,7 @@ const ModalBenhnhan = ({ modal, setModal, oldBenhnhan }) => {
                 type="date"
                 name="ngaysinh"
                 placeholder="Ngày sinh"
-                value={benhnhan.ngaysinh || ""}
+                value={formatInputDate(benhnhan.ngaysinh) || ""}
                 onChange={handleChange}
               />
             </CCol>
@@ -159,7 +159,7 @@ const ModalBenhnhan = ({ modal, setModal, oldBenhnhan }) => {
                 type="date"
                 name="ngaylap"
                 placeholder="Ngày tạo hồ sơ"
-                value={benhnhan.ngaylap || ""}
+                value={formatInputDate(benhnhan.ngaylap) || ""}
                 onChange={handleChange}
               />
             </CCol>
@@ -174,7 +174,7 @@ const ModalBenhnhan = ({ modal, setModal, oldBenhnhan }) => {
                 type="date"
                 name="hethan"
                 placeholder="Ngày hết hạn"
-                value={benhnhan.hethan || ""}
+                value={formatInputDate(benhnhan.hethan) || ""}
                 onChange={handleChange}
               />
             </CCol>

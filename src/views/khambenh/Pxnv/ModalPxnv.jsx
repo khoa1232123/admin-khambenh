@@ -3,6 +3,7 @@ import {
   CCol,
   CForm,
   CFormGroup,
+  CInput,
   CLabel,
   CModal,
   CModalBody,
@@ -13,15 +14,16 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { formatInputDate } from "src/helpers";
 import { randomMaso } from "src/helpers";
 import { renderOptions } from "src/helpers/renderOptions";
 import {
-  createPdkkb,
+  createPxnv,
   getBenhnhans,
-  updatePdkkb,
+  updatePxnv,
 } from "src/redux/action-creators";
 
-const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
+const ModalPxnv = ({ modal, setModal, oldPxnv }) => {
   const dispatch = useDispatch();
 
   const { benhnhans } = useSelector((state) => state.benhnhan);
@@ -30,61 +32,91 @@ const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
     dispatch(getBenhnhans());
   }, [dispatch]);
 
-  const [pdkkb, setPdkkb] = useState({});
+  const [pxnv, setPxnv] = useState({});
 
   const handleChange = (e) => {
     console.log(e);
     const name = e.target.name;
     const value = e.target.value;
-    setPdkkb({ ...pdkkb, [name]: value });
+    setPxnv({ ...pxnv, [name]: value });
   };
 
   useEffect(() => {
-    if (oldPdkkb) {
-      setPdkkb(oldPdkkb);
+    if (oldPxnv) {
+      setPxnv(oldPxnv);
     }
-  }, [oldPdkkb]);
+  }, [oldPxnv]);
 
   const handleClick = () => {
-    console.log({ pdkkb, oldPdkkb });
-    if (pdkkb.ten !== "") {
-      if (Object.keys(oldPdkkb).length === 0) {
-        pdkkb["mso"] = randomMaso("pd");
+    console.log({ pxnv, oldPxnv });
+    if (pxnv.ten !== "") {
+      if (Object.keys(oldPxnv).length === 0) {
+        pxnv["mso"] = randomMaso("xn");
 
-        dispatch(createPdkkb(pdkkb));
+        dispatch(createPxnv(pxnv));
       } else {
-        dispatch(updatePdkkb(pdkkb));
+        dispatch(updatePxnv(pxnv));
       }
-      setPdkkb({});
+      setPxnv({});
       setModal(false);
     }
   };
 
   const closeModal = () => {
-    setPdkkb({});
+    setPxnv({});
     setModal(false);
   };
 
   return (
     <CModal show={modal} onClose={closeModal}>
       <CModalHeader closeButton>
-        <CModalTitle>Update Pdkkb</CModalTitle>
+        <CModalTitle>Update Pxnv</CModalTitle>
       </CModalHeader>
       <CModalBody>
         <CForm action="" method="post" className="form-horizontal">
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Khoa</CLabel>
+              <CLabel htmlFor="text-input">Hồ sơ bệnh nhân</CLabel>
             </CCol>
             <CCol xs="12" md="9">
               <CSelect
                 id="hosobenhnhan"
                 name="hosobenhnhan"
-                value={pdkkb.hosobenhnhan || ""}
+                value={pxnv.hosobenhnhan || ""}
                 onChange={handleChange}
               >
                 {renderOptions(benhnhans)}
               </CSelect>
+            </CCol>
+          </CFormGroup>
+          <CFormGroup row>
+            <CCol md="3">
+              <CLabel htmlFor="text-input">Ngày Nhập viện</CLabel>
+            </CCol>
+            <CCol xs="12" md="9">
+              <CInput
+                id="ngayNhap"
+                type="date"
+                name="ngayNhap"
+                placeholder="Ngày Nhập Viện"
+                value={formatInputDate(pxnv.ngayNhap) || ""}
+                onChange={handleChange}
+              />
+            </CCol>
+          </CFormGroup>
+          <CFormGroup row>
+            <CCol md="3">
+              <CLabel htmlFor="text-input">Ngày Xuất viện</CLabel>
+            </CCol>
+            <CCol xs="12" md="9">
+              <CInput
+                id="ngayXuat"
+                type="date"
+                name="ngayXuat"
+                placeholder="Ngày Xuất Viện"
+                value={formatInputDate(pxnv.ngayXuat) || ""}
+                onChange={handleChange}
+              />
             </CCol>
           </CFormGroup>
         </CForm>
@@ -101,4 +133,4 @@ const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
   );
 };
 
-export default ModalPdkkb;
+export default ModalPxnv;

@@ -10,28 +10,29 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getPdkkbs, deletePdkkb } from "src/redux/action-creators";
-import ModalPdkkb from "./ModalPdkkb";
+import { formatDate } from "src/helpers";
+import { getPxnvs, deletePxnv } from "src/redux/action-creators";
+import ModalPxnv from "./ModalPxnv";
 
-const Pdkkb = () => {
+const Pxnv = () => {
   const dispatch = useDispatch();
-  const [oldPdkkb, setOldPdkkb] = useState({});
+  const [oldPxnv, setOldPxnv] = useState({});
   const [modal, setModal] = useState(false);
 
-  const { pdkkbs } = useSelector((state) => state.pdkkb);
+  const { pxnvs } = useSelector((state) => state.pxnv);
 
   useEffect(() => {
-    dispatch(getPdkkbs());
+    dispatch(getPxnvs());
   }, [dispatch]);
 
   const handleUpdate = (item) => {
-    setOldPdkkb(item);
+    setOldPxnv(item);
     setModal(true);
   };
 
   const handleDelete = (item) => {
     if (window.confirm("Are you sure?")) {
-      dispatch(deletePdkkb(item));
+      dispatch(deletePxnv(item));
     }
   };
 
@@ -39,7 +40,7 @@ const Pdkkb = () => {
     setModal(true);
   };
 
-  console.log(pdkkbs);
+  console.log(pxnvs);
 
   return (
     <>
@@ -60,9 +61,12 @@ const Pdkkb = () => {
             </CCardHeader>
             <CCardBody>
               <CDataTable
-                items={pdkkbs}
+                items={pxnvs}
                 fields={[
                   "Mã Số",
+                  "Ngày Nhập viện",
+                  "Ngày Xuất viện",
+                  "Mã Bệnh Nhân",
                   "Tên bệnh nhân",
                   "email",
                   "Số điện thoại",
@@ -73,6 +77,12 @@ const Pdkkb = () => {
                 pagination
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
+                  "Ngày Nhập viện": (item) => (
+                    <td>{formatDate(item.ngayNhap)}</td>
+                  ),
+                  "Ngày Xuất viện": (item) => (
+                    <td>{formatDate(item.ngayXuat)}</td>
+                  ),
                   "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,
                   "Tên bệnh nhân": (item) => <td>{item.hosobenhnhan.ten}</td>,
                   email: (item) => <td>{item.hosobenhnhan.email}</td>,
@@ -101,9 +111,9 @@ const Pdkkb = () => {
           </CCard>
         </CCol>
       </CRow>
-      <ModalPdkkb modal={modal} setModal={setModal} oldPdkkb={oldPdkkb} />
+      <ModalPxnv modal={modal} setModal={setModal} oldPxnv={oldPxnv} />
     </>
   );
 };
 
-export default Pdkkb;
+export default Pxnv;

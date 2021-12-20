@@ -7,3 +7,4 @@ export * from "./bacsiActions";
 export * from "./khoaActions";
 export * from "./benhnhanActions";
 export * from "./pdkkbActions";
+export * from "./pxnvActions";

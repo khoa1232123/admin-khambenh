@@ -8,6 +8,7 @@ import bacsi from "./bacsiReducer";
 import khoa from "./khoaReducer";
 import benhnhan from "./benhnhanReducer";
 import pdkkb from "./pdkkbReducer";
+import pxnv from "./pxnvReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   khoa,
   benhnhan,
   pdkkb,
+  pxnv,
 });
 
 export default rootReducer;
