@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { TheLayout } from "./containers";
 import "./scss/style.scss";
-import { Login, Page404, Page500 } from "./views/Pages";
+import { Login, Page404, Page500, Register } from "./views/Pages";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -29,7 +29,7 @@ const App = () => {
               )
             }
           />
-          {/* <Route
+          <Route
             exact
             path="/register"
             name="Register Page"
@@ -40,7 +40,7 @@ const App = () => {
                 <Redirect to="/" />
               )
             }
-          /> */}
+          />
           <Route
             exact
             path="/404"

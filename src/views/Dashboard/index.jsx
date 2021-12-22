@@ -13,13 +13,10 @@ import {
   CRow,
 } from "@coreui/react";
 import React from "react";
-import MainChartExample from "../Charts/MainChartExample.js";
-import { WidgetsBrand, WidgetsDropdown } from "../Widgets";
 
 const Dashboard = () => {
   return (
     <>
-      <WidgetsDropdown />
       <CCard>
         <CCardBody>
           <CRow>
@@ -47,7 +44,6 @@ const Dashboard = () => {
               </CButtonGroup>
             </CCol>
           </CRow>
-          <MainChartExample style={{ height: "300px", marginTop: "40px" }} />
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -103,8 +99,6 @@ const Dashboard = () => {
           </CRow>
         </CCardFooter>
       </CCard>
-
-      <WidgetsBrand withCharts />
 
       <CRow>
         <CCol>

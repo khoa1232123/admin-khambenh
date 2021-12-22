@@ -9,6 +9,11 @@ import khoa from "./khoaReducer";
 import benhnhan from "./benhnhanReducer";
 import pdkkb from "./pdkkbReducer";
 import pxnv from "./pxnvReducer";
+import lephi from "./lephiReducer";
+import vienphi from "./vienphiReducer";
+import phieuxetnghiem from "./phieuxetnghiemReducer";
+import phieukhambenh from "./phieukhambenhReducer";
+import thuoc from "./thuocReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -21,6 +26,11 @@ const rootReducer = combineReducers({
   benhnhan,
   pdkkb,
   pxnv,
+  lephi,
+  vienphi,
+  phieuxetnghiem,
+  phieukhambenh,
+  thuoc,
 });
 
 export default rootReducer;

@@ -8,3 +8,8 @@ export * from "./khoaActions";
 export * from "./benhnhanActions";
 export * from "./pdkkbActions";
 export * from "./pxnvActions";
+export * from "./lephiActions";
+export * from "./vienphiActions";
+export * from "./phieuxetnghiemActions";
+export * from "./phieukhambenhActions";
+export * from "./thuocActions";
