@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "src/helpers/axios";
+
 const { authTypes, optionTypes } = require("../types");
 
 const loginStart = () => ({
@@ -33,15 +34,10 @@ const logoutSuccess = () => ({
 });
 
 const login = (user) => {
-  console.log("https://node-khambenh.herokuapp.com/api/auth/login");
   return async (dispatch) => {
     dispatch(loginStart());
-    console.log("https://node-khambenh.herokuapp.com/api/auth/login1");
     try {
-      const res = await axios.post(
-        "https://node-khambenh.herokuapp.com/api/auth/login",
-        user
-      );
+      const res = await axios.post("/api/auth/login", user);
       localStorage.setItem("user", JSON.stringify(res.data));
       const accessToken = res.data.accessToken;
 
@@ -63,10 +59,7 @@ const register = (user) => {
   return async (dispatch) => {
     dispatch(registerStart());
     try {
-      const res = await axios.post(
-        "https://node-khambenh.herokuapp.com/api/auth/register",
-        user
-      );
+      const res = await axios.post("/auth/register", user);
       localStorage.setItem("user", JSON.stringify(res.data));
       dispatch(registerSuccess(res.data));
     } catch (error) {

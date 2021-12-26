@@ -35,6 +35,7 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
     const value = e.target.value;
     setBacsi({ ...bacsi, [name]: value });
   };
+  console.log(oldBacsi);
 
   useEffect(() => {
     if (oldBacsi) {
@@ -169,7 +170,7 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
               <CSelect
                 id="khoa"
                 name="khoa"
-                value={bacsi.khoa || ""}
+                value={(bacsi.khoa && bacsi.khoa._id) || ""}
                 onChange={handleChange}
               >
                 {renderOptions(khoas)}

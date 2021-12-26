@@ -10,6 +10,7 @@ import {
   CModalFooter,
   CModalHeader,
   CModalTitle,
+  CTextarea,
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -38,7 +39,7 @@ const ModalThuoc = ({ modal, setModal, oldThuoc }) => {
     console.log({ thuoc, oldThuoc });
     if (thuoc.ten !== "") {
       if (Object.keys(oldThuoc).length === 0) {
-        thuoc["mso"] = randomMaso("vp");
+        thuoc["mso"] = randomMaso("tc");
 
         dispatch(createThuoc(thuoc));
       } else {
@@ -71,24 +72,25 @@ const ModalThuoc = ({ modal, setModal, oldThuoc }) => {
                 type="text"
                 name="ten"
                 placeholder="Tên thuốc"
-                value={thuoc.ngaydong || ""}
+                value={thuoc.ten || ""}
                 onChange={handleChange}
               />
             </CCol>
           </CFormGroup>
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Số tiền</CLabel>
+              <CLabel htmlFor="text-input">Hướng dẫn sử dụng</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              <CInput
-                id="sotien"
-                type="number"
-                name="sotien"
-                placeholder="Số tiền"
-                value={thuoc.sotien || 0}
+              <CTextarea
+                id="huongdansudung"
+                name="huongdansudung"
+                placeholder="Hướng dẫn sử dụng"
+                value={thuoc.huongdansudung || ""}
                 onChange={handleChange}
-              />
+                // style={{ height: "200px" }}
+                rows={7}
+              ></CTextarea>
             </CCol>
           </CFormGroup>
         </CForm>

@@ -18,6 +18,24 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
+    name: "Bệnh",
+    to: "/khambenh/benh",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Chi tiết phiếu khám",
+    to: "/khambenh/chitietphieukham",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Toa Thuốc",
+    to: "/khambenh/toathuoc",
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
     name: "Thuốc",
     to: "/khambenh/thuoc",
     icon: "cil-drop",

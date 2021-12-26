@@ -17,6 +17,12 @@ const Pxnv = React.lazy(() => import("./views/khambenh/Pxnv"));
 const Lephi = React.lazy(() => import("./views/khambenh/Lephi"));
 const Vienphi = React.lazy(() => import("./views/khambenh/Vienphi"));
 const Thuoc = React.lazy(() => import("./views/khambenh/Thuoc"));
+const Toathuoc = React.lazy(() => import("./views/khambenh/Toathuoc"));
+const Benh = React.lazy(() => import("./views/khambenh/Benh"));
+const Chitietphieukham = React.lazy(() =>
+  import("./views/khambenh/Chitietphieukham")
+);
+
 const Phieuxetnghiem = React.lazy(() =>
   import("./views/khambenh/Phieuxetnghiem")
 );
@@ -106,6 +112,24 @@ const routes = [
     exact: true,
     name: "Thuốc",
     component: Thuoc,
+  },
+  {
+    path: "/khambenh/toathuoc",
+    exact: true,
+    name: "Toa Thuốc",
+    component: Toathuoc,
+  },
+  {
+    path: "/khambenh/chitietphieukham",
+    exact: true,
+    name: "Chi tiết phiếu khám",
+    component: Chitietphieukham,
+  },
+  {
+    path: "/khambenh/benh",
+    exact: true,
+    name: "Bệnh",
+    component: Benh,
   },
 ];
 

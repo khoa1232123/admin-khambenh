@@ -13,3 +13,6 @@ export * from "./vienphiActions";
 export * from "./phieuxetnghiemActions";
 export * from "./phieukhambenhActions";
 export * from "./thuocActions";
+export * from "./toathuocActions";
+export * from "./chitietphieukhamActions";
+export * from "./benhActions";

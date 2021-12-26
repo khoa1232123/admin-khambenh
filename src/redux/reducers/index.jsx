@@ -14,6 +14,9 @@ import vienphi from "./vienphiReducer";
 import phieuxetnghiem from "./phieuxetnghiemReducer";
 import phieukhambenh from "./phieukhambenhReducer";
 import thuoc from "./thuocReducer";
+import toathuoc from "./toathuocReducer";
+import chitietphieukham from "./chitietphieukhamReducer";
+import benh from "./benhReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -31,6 +34,9 @@ const rootReducer = combineReducers({
   phieuxetnghiem,
   phieukhambenh,
   thuoc,
+  toathuoc,
+  chitietphieukham,
+  benh,
 });
 
 export default rootReducer;
