@@ -35,11 +35,12 @@ const ModalPhieukhambenh = ({ modal, setModal, oldPhieukhambenh }) => {
   const [phieukhambenh, setPhieukhambenh] = useState({});
 
   const handleChange = (e) => {
-    console.log(e);
     const name = e.target.name;
     const value = e.target.value;
     setPhieukhambenh({ ...phieukhambenh, [name]: value });
   };
+
+  console.log(phieukhambenh);
 
   useEffect(() => {
     if (oldPhieukhambenh) {
@@ -51,7 +52,7 @@ const ModalPhieukhambenh = ({ modal, setModal, oldPhieukhambenh }) => {
     console.log({ phieukhambenh, oldPhieukhambenh });
     if (phieukhambenh.ten !== "") {
       if (Object.keys(oldPhieukhambenh).length === 0) {
-        phieukhambenh["mso"] = randomMaso("xn");
+        phieukhambenh["mso"] = randomMaso("pk");
 
         dispatch(createPhieukhambenh(phieukhambenh));
       } else {
@@ -92,30 +93,15 @@ const ModalPhieukhambenh = ({ modal, setModal, oldPhieukhambenh }) => {
 
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Ngày Đóng</CLabel>
+              <CLabel htmlFor="text-input">Ngày giờ khám</CLabel>
             </CCol>
             <CCol xs="12" md="9">
               <CInput
-                id="ngaydong"
+                id="ngaygiokham"
                 type="date"
-                name="ngaydong"
-                placeholder="Ngày Nhập Viện"
-                value={formatInputDate(phieukhambenh.ngaydong) || ""}
-                onChange={handleChange}
-              />
-            </CCol>
-          </CFormGroup>
-          <CFormGroup row>
-            <CCol md="3">
-              <CLabel htmlFor="text-input">Số tiền</CLabel>
-            </CCol>
-            <CCol xs="12" md="9">
-              <CInput
-                id="sotien"
-                type="number"
-                name="sotien"
-                placeholder="Số tiền"
-                value={phieukhambenh.sotien || 0}
+                name="ngaygiokham"
+                placeholder="Ngày giờ khám"
+                value={formatInputDate(phieukhambenh.ngaygiokham) || ""}
                 onChange={handleChange}
               />
             </CCol>

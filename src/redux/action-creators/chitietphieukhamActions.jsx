@@ -19,7 +19,7 @@ const getChitietphieukhams = () => {
   return async (dispatch) => {
     dispatch(getChitietphieukhamsStart());
     try {
-      const res = await axios.get("/phieuxuatnhapvien");
+      const res = await axios.get("/chitietphieukhambenh");
 
       console.log(res.data);
 
@@ -48,7 +48,7 @@ const getChitietphieukham = (id) => {
   return async (dispatch) => {
     dispatch(getChitietphieukhamStart());
     try {
-      const res = await axios.get("/phieuxuatnhapvien/" + id);
+      const res = await axios.get("/chitietphieukhambenh/" + id);
 
       dispatch(getChitietphieukhamSuccess(res.data));
     } catch (error) {
@@ -79,7 +79,7 @@ const createChitietphieukham = (chitietphieukham) => {
     console.log(getState());
     dispatch(createChitietphieukhamStart());
     try {
-      const res = await axios.post("/phieuxuatnhapvien", chitietphieukham);
+      const res = await axios.post("/chitietphieukhambenh", chitietphieukham);
       console.log(res);
 
       dispatch(createChitietphieukhamSuccess([res.data, ...chitietphieukhams]));
@@ -110,7 +110,7 @@ const deleteChitietphieukham = (chitietphieukham) => {
     } = getState();
     dispatch(deleteChitietphieukhamStart());
     try {
-      await axios.delete("/phieuxuatnhapvien/" + chitietphieukham._id);
+      await axios.delete("/chitietphieukhambenh/" + chitietphieukham._id);
       const newchitietphieukhams = chitietphieukhams.filter(
         (item) => item._id !== chitietphieukham._id
       );
@@ -145,7 +145,7 @@ const updateChitietphieukham = (chitietphieukham) => {
     dispatch(updateChitietphieukhamStart());
     try {
       const res = await axios.put(
-        "/phieuxuatnhapvien/" + chitietphieukham._id,
+        "/chitietphieukhambenh/" + chitietphieukham._id,
         chitietphieukham
       );
 

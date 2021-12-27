@@ -8,12 +8,10 @@ import {
   CRow,
 } from "@coreui/react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { formatDate } from "src/helpers";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  getChitietphieukhams,
   deleteChitietphieukham,
+  getChitietphieukhams,
 } from "src/redux/action-creators";
 import ModalChitietphieukham from "./ModalChitietphieukham";
 
@@ -27,6 +25,8 @@ const Chitietphieukham = () => {
   useEffect(() => {
     dispatch(getChitietphieukhams());
   }, [dispatch]);
+
+  console.log(chitietphieukhams);
 
   const handleUpdate = (item) => {
     setOldChitietphieukham(item);
@@ -67,12 +67,12 @@ const Chitietphieukham = () => {
                 items={chitietphieukhams}
                 fields={[
                   "Mã Số",
-                  "Ngày Nhập viện",
-                  "Ngày Xuất viện",
-                  "Mã Bệnh Nhân",
-                  "Tên bệnh nhân",
-                  "email",
-                  "Số điện thoại",
+                  // "Ngày Nhập viện",
+                  // "Ngày Xuất viện",
+                  // "Mã Bệnh Nhân",
+                  // "Tên bệnh nhân",
+                  // "email",
+                  // "Số điện thoại",
                   "actions",
                 ]}
                 striped
@@ -80,18 +80,18 @@ const Chitietphieukham = () => {
                 pagination
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
-                  "Ngày Nhập viện": (item) => (
-                    <td>{formatDate(item.ngayNhap)}</td>
-                  ),
-                  "Ngày Xuất viện": (item) => (
-                    <td>{formatDate(item.ngayXuat)}</td>
-                  ),
-                  "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,
-                  "Tên bệnh nhân": (item) => <td>{item.hosobenhnhan.ten}</td>,
-                  email: (item) => <td>{item.hosobenhnhan.email}</td>,
-                  "Số điện thoại": (item) => (
-                    <td>{item.hosobenhnhan.sodienthoai}</td>
-                  ),
+                  // "Ngày Nhập viện": (item) => (
+                  //   <td>{formatDate(item.ngayNhap)}</td>
+                  // ),
+                  // "Ngày Xuất viện": (item) => (
+                  //   <td>{formatDate(item.ngayXuat)}</td>
+                  // ),
+                  // "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,
+                  // "Tên bệnh nhân": (item) => <td>{item.hosobenhnhan.ten}</td>,
+                  // email: (item) => <td>{item.hosobenhnhan.email}</td>,
+                  // "Số điện thoại": (item) => (
+                  //   <td>{item.hosobenhnhan.sodienthoai}</td>
+                  // ),
                   actions: (item) => (
                     <td>
                       <CButton

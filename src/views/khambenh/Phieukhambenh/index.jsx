@@ -79,9 +79,9 @@ const Phieukhambenh = () => {
                 pagination
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
-                  "Tên xét nghiệm": (item) => <td>{item.ten}</td>,
-                  Ngày: (item) => <td>{formatDate(item.ngay)}</td>,
-                  "Kết quả": (item) => <td>{item.ketqua}</td>,
+                  "Ngày giờ khám": (item) => (
+                    <td>{formatDate(item.ngaygiokham)}</td>
+                  ),
                   "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,
                   "Tên bệnh nhân": (item) => <td>{item.hosobenhnhan.ten}</td>,
                   email: (item) => <td>{item.hosobenhnhan.email}</td>,

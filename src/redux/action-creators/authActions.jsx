@@ -37,7 +37,7 @@ const login = (user) => {
   return async (dispatch) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post("/api/auth/login", user);
+      const res = await axios.post("/auth/login", user);
       localStorage.setItem("user", JSON.stringify(res.data));
       const accessToken = res.data.accessToken;
 

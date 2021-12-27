@@ -1,8 +1,8 @@
-import { pxnvTypes } from "../types";
+import { chitietphieukhamTypes } from "../types";
 
 const initialState = {
-  pxnvs: [],
-  pxnv: {},
+  chitietphieukhams: [],
+  chitietphieukham: {},
   isFetching: false,
   error: false,
   message: "",
@@ -10,109 +10,110 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case pxnvTypes.GET_PXNVS_START:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAMS_START:
       return {
-        pxnvs: [],
+        chitietphieukhams: [],
         isFetching: true,
         error: false,
         message: "",
       };
-    case pxnvTypes.GET_PXNVS_SUCCESS:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAMS_SUCCESS:
+      // console.log("chi tiet phieu kham success");
       return {
-        pxnvs: payload,
+        chitietphieukhams: payload,
         isFetching: false,
         error: false,
         message: "Login thành công!",
       };
-    case pxnvTypes.GET_PXNVS_FAILURE:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAMS_FAILURE:
       return {
-        pxnvs: [],
+        chitietphieukhams: [],
         isFetching: false,
         error: true,
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
-    case pxnvTypes.GET_PXNV_START:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAM_START:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: true,
         error: false,
         message: "",
       };
-    case pxnvTypes.GET_PXNV_SUCCESS:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAM_SUCCESS:
       return {
-        pxnv: payload,
+        chitietphieukham: payload,
         isFetching: false,
         error: false,
         message: "Login thành công!",
       };
-    case pxnvTypes.GET_PXNV_FAILURE:
+    case chitietphieukhamTypes.GET_CHITIETPHIEUKHAM_FAILURE:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: false,
         error: true,
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
-    case pxnvTypes.CREATE_PXNV_START:
+    case chitietphieukhamTypes.CREATE_CHITIETPHIEUKHAM_START:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: true,
         error: false,
         message: "",
       };
-    case pxnvTypes.CREATE_PXNV_SUCCESS:
+    case chitietphieukhamTypes.CREATE_CHITIETPHIEUKHAM_SUCCESS:
       console.log(state);
       return {
-        pxnvs: payload,
+        chitietphieukhams: payload,
         isFetching: false,
         error: false,
         message: "Login thành công!",
       };
-    case pxnvTypes.CREATE_PXNV_FAILURE:
+    case chitietphieukhamTypes.CREATE_CHITIETPHIEUKHAM_FAILURE:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: false,
         error: true,
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
-    case pxnvTypes.UPDATE_PXNV_START:
+    case chitietphieukhamTypes.UPDATE_CHITIETPHIEUKHAM_START:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: true,
         error: false,
         message: "",
       };
-    case pxnvTypes.UPDATE_PXNV_SUCCESS:
+    case chitietphieukhamTypes.UPDATE_CHITIETPHIEUKHAM_SUCCESS:
       return {
-        pxnvs: payload,
+        chitietphieukhams: payload,
         isFetching: false,
         error: false,
         message: "Login thành công!",
       };
-    case pxnvTypes.UPDATE_PXNV_FAILURE:
+    case chitietphieukhamTypes.UPDATE_CHITIETPHIEUKHAM_FAILURE:
       return {
-        pxnv: {},
+        chitietphieukham: {},
         isFetching: false,
         error: true,
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
-    case pxnvTypes.DELETE_PXNV_START:
+    case chitietphieukhamTypes.DELETE_CHITIETPHIEUKHAM_START:
       return {
         isFetching: true,
         error: false,
         message: "",
       };
-    case pxnvTypes.DELETE_PXNV_SUCCESS:
+    case chitietphieukhamTypes.DELETE_CHITIETPHIEUKHAM_SUCCESS:
       return {
-        pxnvs: payload,
+        chitietphieukhams: payload,
         isFetching: false,
         error: false,
         message: "DELETE success!",
       };
-    case pxnvTypes.DELETE_PXNV_FAILURE:
+    case chitietphieukhamTypes.DELETE_CHITIETPHIEUKHAM_FAILURE:
       return {
         isFetching: false,
         error: true,

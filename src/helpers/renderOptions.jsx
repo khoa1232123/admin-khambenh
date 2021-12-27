@@ -8,14 +8,27 @@ const renderOptions = (options) => {
 
   for (const item of options) {
     data.push(
-      <option
-        value={item._id}
-        key={item._id}
-      >{`${item.mso} - ${item.ten}`}</option>
+      <option value={item._id} key={item._id}>{`${item.mso} - ${
+        item.msobn ? item.msobn : ""
+      } ${item.ten}`}</option>
     );
   }
 
   return data;
 };
 
-export { renderOptions };
+const convertPhieukham = (phieukham) => {
+  const data = [];
+  // eslint-disable-next-line array-callback-return
+  phieukham.map((item, index) => {
+    data.push({
+      _id: item._id,
+      mso: item.mso,
+      msobn: item.hosobenhnhan.mso,
+      ten: item.hosobenhnhan.ten,
+    });
+  });
+  return data;
+};
+
+export { renderOptions, convertPhieukham };
