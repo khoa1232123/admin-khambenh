@@ -9,6 +9,7 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   deleteChitietphieukham,
   getChitietphieukhams,
@@ -67,9 +68,9 @@ const Chitietphieukham = () => {
                 items={chitietphieukhams}
                 fields={[
                   "Mã Số",
-                  // "Ngày Nhập viện",
-                  // "Ngày Xuất viện",
-                  // "Mã Bệnh Nhân",
+                  "Bác sĩ",
+                  "Phiếu khám",
+                  "Bệnh Nhân",
                   // "Tên bệnh nhân",
                   // "email",
                   // "Số điện thoại",
@@ -79,19 +80,27 @@ const Chitietphieukham = () => {
                 itemsPerPage={10}
                 pagination
                 scopedSlots={{
-                  "Mã Số": (item) => <td>{item.mso}</td>,
-                  // "Ngày Nhập viện": (item) => (
-                  //   <td>{formatDate(item.ngayNhap)}</td>
-                  // ),
-                  // "Ngày Xuất viện": (item) => (
-                  //   <td>{formatDate(item.ngayXuat)}</td>
-                  // ),
-                  // "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,
-                  // "Tên bệnh nhân": (item) => <td>{item.hosobenhnhan.ten}</td>,
-                  // email: (item) => <td>{item.hosobenhnhan.email}</td>,
-                  // "Số điện thoại": (item) => (
-                  //   <td>{item.hosobenhnhan.sodienthoai}</td>
-                  // ),
+                  "Mã Số": (item) => (
+                    <td>
+                      <Link
+                        to={"/khambenh/chitietphieukham/detail/" + item._id}
+                      >
+                        {item.mso}
+                      </Link>
+                    </td>
+                  ),
+                  "Bác sĩ": (item) => (
+                    <td>
+                      {item.bacsi.mso} - {item.bacsi.ten}
+                    </td>
+                  ),
+                  "Phiếu khám": (item) => <td>{item.phieukhambenh.mso}</td>,
+                  "Bệnh Nhân": (item) => (
+                    <td>
+                      {item.phieukhambenh.hosobenhnhan.mso} -{" "}
+                      {item.phieukhambenh.hosobenhnhan.ten}
+                    </td>
+                  ),
                   actions: (item) => (
                     <td>
                       <CButton

@@ -3,7 +3,6 @@ import {
   CCol,
   CForm,
   CFormGroup,
-  CInput,
   CLabel,
   CModal,
   CModalBody,
@@ -12,10 +11,11 @@ import {
   CModalTitle,
   CRow,
   CSelect,
+  CTextarea,
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatInputDate, randomMaso } from "src/helpers";
+import { randomMaso } from "src/helpers";
 import { convertPhieukham, renderOptions } from "src/helpers/renderOptions";
 import {
   createChitietphieukham,
@@ -72,6 +72,7 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
 
   const handleClick = () => {
     console.log({ chitietphieukham, oldChitietphieukham });
+    chitietphieukham["chitiet"] = chitietbenh;
     if (chitietphieukham.ten !== "") {
       if (Object.keys(oldChitietphieukham).length === 0) {
         chitietphieukham["mso"] = randomMaso("xn");
@@ -109,7 +110,12 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               <CSelect
                 id="phieukhambenh"
                 name="phieukhambenh"
-                value={chitietphieukham.phieukhambenh || ""}
+                value={
+                  (chitietphieukham.phieukhambenh &&
+                    chitietphieukham.phieukhambenh._id) ||
+                  chitietphieukham.phieukhambenh ||
+                  ""
+                }
                 onChange={handleChange}
               >
                 {renderOptions(convertPhieukham(phieukhambenhs))}
@@ -124,7 +130,12 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               <CSelect
                 id="toathuoc"
                 name="toathuoc"
-                value={chitietphieukham.toathuoc || ""}
+                value={
+                  (chitietphieukham.toathuoc &&
+                    chitietphieukham.toathuoc._id) ||
+                  chitietphieukham.toathuoc ||
+                  ""
+                }
                 onChange={handleChange}
               >
                 {renderOptions(toathuocs)}
@@ -139,7 +150,11 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               <CSelect
                 id="bacsi"
                 name="bacsi"
-                value={chitietphieukham.bacsi || ""}
+                value={
+                  (chitietphieukham.bacsi && chitietphieukham.bacsi._id) ||
+                  chitietphieukham.bacsi ||
+                  ""
+                }
                 onChange={handleChange}
               >
                 {renderOptions(bacsis)}
@@ -177,30 +192,15 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
           </CFormGroup>
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Ngày Nhập viện</CLabel>
+              <CLabel htmlFor="text-input">Triệu chứng</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              <CInput
-                id="ngayNhap"
-                type="date"
-                name="ngayNhap"
-                placeholder="Ngày Nhập Viện"
-                value={formatInputDate(chitietphieukham.ngayNhap) || ""}
-                onChange={handleChange}
-              />
-            </CCol>
-          </CFormGroup>
-          <CFormGroup row>
-            <CCol md="3">
-              <CLabel htmlFor="text-input">Ngày Xuất viện</CLabel>
-            </CCol>
-            <CCol xs="12" md="9">
-              <CInput
-                id="ngayXuat"
-                type="date"
-                name="ngayXuat"
-                placeholder="Ngày Xuất Viện"
-                value={formatInputDate(chitietphieukham.ngayXuat) || ""}
+              <CTextarea
+                id="trieuchung"
+                name="trieuchung"
+                rows={5}
+                placeholder="Triệu chứng"
+                value={chitietphieukham.trieuchung || ""}
                 onChange={handleChange}
               />
             </CCol>

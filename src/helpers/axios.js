@@ -6,7 +6,7 @@ import Axios from "axios";
 // const axios = Axios.create({
 //   baseURL: "https://node-khambenh.herokuapp.com/api",
 // });
-
+// http://localhost:8800/api/chitietphieukhambenh
 // import { getToken } from "../helps/localStorage";
 
 const token = localStorage.getItem("user")

@@ -30,6 +30,10 @@ const Phieukhambenh = React.lazy(() =>
   import("./views/khambenh/Phieukhambenh")
 );
 
+const DetailChitietphieukham = React.lazy(() =>
+  import("./views/khambenh/Chitietphieukham/Detail")
+);
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
@@ -124,6 +128,12 @@ const routes = [
     exact: true,
     name: "Chi tiết phiếu khám",
     component: Chitietphieukham,
+  },
+  {
+    path: "/khambenh/chitietphieukham/detail/:id",
+    exact: true,
+    name: "Chi tiết phiếu khám",
+    component: DetailChitietphieukham,
   },
   {
     path: "/khambenh/benh",
