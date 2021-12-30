@@ -94,11 +94,11 @@ const Chitietphieukham = () => {
                       {item.bacsi.mso} - {item.bacsi.ten}
                     </td>
                   ),
-                  "Phiếu khám": (item) => <td>{item.phieukhambenh.mso}</td>,
+                  "Phiếu khám": (item) => <td>{item.phieukhambenh && item.phieukhambenh.mso}</td>,
                   "Bệnh Nhân": (item) => (
                     <td>
-                      {item.phieukhambenh.hosobenhnhan.mso} -{" "}
-                      {item.phieukhambenh.hosobenhnhan.ten}
+                      {item.phieukhambenh && item.phieukhambenh.hosobenhnhan.mso} -{" "}
+                      {item.phieukhambenh && item.phieukhambenh.hosobenhnhan.ten}
                     </td>
                   ),
                   actions: (item) => (
