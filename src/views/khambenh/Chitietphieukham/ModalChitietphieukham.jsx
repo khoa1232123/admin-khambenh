@@ -102,18 +102,20 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               <CLabel htmlFor="text-input">Bác sĩ</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              <CSelect
-                id="bacsi"
-                name="bacsi"
-                value={
-                  (chitietphieukham.bacsi && chitietphieukham.bacsi._id) ||
-                  chitietphieukham.bacsi ||
-                  ""
-                }
-                onChange={handleChange}
-              >
-                {renderOptions(bacsis)}
-              </CSelect>
+              {chitietphieukham.bacsi && (
+                <CSelect
+                  id="bacsi"
+                  name="bacsi"
+                  value={
+                    (chitietphieukham.bacsi && chitietphieukham.bacsi._id) ||
+                    chitietphieukham.bacsi ||
+                    ""
+                  }
+                  onChange={handleChange}
+                >
+                  {renderOptions(bacsis)}
+                </CSelect>
+              )}
             </CCol>
           </CFormGroup>
           <CFormGroup row>
