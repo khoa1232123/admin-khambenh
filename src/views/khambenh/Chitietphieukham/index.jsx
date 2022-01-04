@@ -82,23 +82,31 @@ const Chitietphieukham = () => {
                 scopedSlots={{
                   "Mã Số": (item) => (
                     <td>
-                      <Link
-                        to={"/khambenh/chitietphieukham/detail/" + item._id}
-                      >
+                      <Link to={"/khambenh/chitietphieukham/" + item._id}>
                         {item.mso}
                       </Link>
                     </td>
                   ),
                   "Bác sĩ": (item) => (
                     <td>
-                      {item.bacsi.mso} - {item.bacsi.ten}
+                      <Link
+                        to={"/khambenh/bacsi/" + (item.bacsi && item.bacsi._id)}
+                      >
+                        {item.bacsi && item.bacsi.mso} -{" "}
+                        {item.bacsi && item.bacsi.ten}
+                      </Link>
                     </td>
                   ),
-                  "Phiếu khám": (item) => <td>{item.phieukhambenh.mso}</td>,
+                  "Phiếu khám": (item) => (
+                    <td>{item.phieukhambenh && item.phieukhambenh.mso}</td>
+                  ),
                   "Bệnh Nhân": (item) => (
                     <td>
-                      {item.phieukhambenh.hosobenhnhan.mso} -{" "}
-                      {item.phieukhambenh.hosobenhnhan.ten}
+                      {item.phieukhambenh &&
+                        item.phieukhambenh.hosobenhnhan.mso}{" "}
+                      -{" "}
+                      {item.phieukhambenh &&
+                        item.phieukhambenh.hosobenhnhan.ten}
                     </td>
                   ),
                   actions: (item) => (

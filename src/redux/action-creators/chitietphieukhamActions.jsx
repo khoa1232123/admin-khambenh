@@ -73,10 +73,10 @@ const createChitietphieukhamFailure = () => ({
 
 const createChitietphieukham = (chitietphieukham) => {
   return async (dispatch, getState) => {
+    // console.log(chitietphieukham);
     const {
       chitietphieukham: { chitietphieukhams },
     } = getState();
-    console.log(getState());
     dispatch(createChitietphieukhamStart());
     try {
       const res = await axios.post("/chitietphieukhambenh", chitietphieukham);
@@ -161,10 +161,75 @@ const updateChitietphieukham = (chitietphieukham) => {
   };
 };
 
+// Update Post
+const updateDTChitietphieukhamStart = () => ({
+  type: chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_START,
+});
+
+const updateDTChitietphieukhamSuccess = (chitietphieukham) => ({
+  type: chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_SUCCESS,
+  payload: chitietphieukham,
+});
+
+const updateDTChitietphieukhamFailure = () => ({
+  type: chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_FAILURE,
+});
+
+const updateDTChitietphieukham = ({ chitietbenh, chitietphieukham }) => {
+  console.log(chitietphieukham);
+  return async (dispatch) => {
+    dispatch(updateDTChitietphieukhamStart());
+    try {
+      const res = await axios.put(
+        "/chitietphieukhambenh/" + chitietphieukham._id,
+        { chitiet: chitietbenh }
+      );
+      dispatch(updateDTChitietphieukhamSuccess(res.data));
+    } catch (error) {
+      dispatch(updateDTChitietphieukhamFailure());
+    }
+  };
+};
+
+// Update Toa thuoc trong Chi tiet phieu kham
+const updateTTChitietphieukhamStart = () => ({
+  type: chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_START,
+});
+
+const updateTTChitietphieukhamSuccess = (chitietphieukhams) => ({
+  type: chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_SUCCESS,
+  payload: chitietphieukhams,
+});
+
+const updateTTChitietphieukhamFailure = () => ({
+  type: chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_FAILURE,
+});
+
+const updateTTChitietphieukham = ({ toathuoc, chitietphieukham }) => {
+  console.log(chitietphieukham);
+  return async (dispatch) => {
+    dispatch(updateTTChitietphieukhamStart());
+    try {
+      const resTT = await axios.post("/toathuoc", toathuoc);
+      if (resTT.data) {
+        const res = await axios.put(
+          "/chitietphieukhambenh/" + chitietphieukham._id,
+          { toathuoc: resTT.data._id }
+        );
+        dispatch(updateTTChitietphieukhamSuccess(res.data));
+      }
+    } catch (error) {
+      dispatch(updateTTChitietphieukhamFailure());
+    }
+  };
+};
+
 export {
   getChitietphieukhams,
   createChitietphieukham,
   deleteChitietphieukham,
   updateChitietphieukham,
   getChitietphieukham,
+  updateTTChitietphieukham,
+  updateDTChitietphieukham,
 };

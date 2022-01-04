@@ -100,6 +100,50 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
+    case chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_START:
+      return {
+        chitietphieukham: {},
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_SUCCESS:
+      return {
+        chitietphieukham: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case chitietphieukhamTypes.UPDATE_TTCHITIETPHIEUKHAM_FAILURE:
+      return {
+        chitietphieukham: {},
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
+
+    case chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_START:
+      return {
+        chitietphieukham: {},
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_SUCCESS:
+      return {
+        chitietphieukham: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_FAILURE:
+      return {
+        chitietphieukham: {},
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
+
     case chitietphieukhamTypes.DELETE_CHITIETPHIEUKHAM_START:
       return {
         isFetching: true,

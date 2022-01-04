@@ -9,6 +9,7 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { formatDate } from "src/helpers";
 import { deleteBacsi, getBacsis } from "src/redux/action-creators";
 import ModalBacsi from "./ModalBacsi";
@@ -78,8 +79,16 @@ const Bacsi = () => {
                 itemsPerPage={10}
                 pagination
                 scopedSlots={{
-                  "Mã Số": (item) => <td>{item.mso}</td>,
-                  "Tên bác sĩ": (item) => <td>{item.ten}</td>,
+                  "Mã Số": (item) => (
+                    <td>
+                      <Link to={"/khambenh/bacsi/" + item._id}>{item.mso}</Link>
+                    </td>
+                  ),
+                  "Tên bác sĩ": (item) => (
+                    <td>
+                      <Link to={"/khambenh/bacsi/" + item._id}>{item.ten}</Link>
+                    </td>
+                  ),
                   "Số Điện Thoại": (item) => <td>{item.sodienthoai}</td>,
                   "Địa Chỉ": (item) => <td>{item.diachi}</td>,
                   "Giới tính": (item) => <td>{item.gioitinh}</td>,

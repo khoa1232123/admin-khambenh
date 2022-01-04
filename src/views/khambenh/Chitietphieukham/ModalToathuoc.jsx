@@ -15,13 +15,18 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatInputDate } from "src/helpers";
-import { randomMaso } from "src/helpers";
+import { useParams } from "react-router-dom";
+import { formatInputDate, randomMaso } from "src/helpers";
 import { renderOptions } from "src/helpers/renderOptions";
-import { createToathuoc, updateToathuoc } from "src/redux/action-creators";
-import { getThuocs } from "src/redux/action-creators/thuocActions";
+import {
+  updateToathuoc,
+  getThuocs,
+  getChitietphieukham,
+  updateTTChitietphieukham,
+} from "src/redux/action-creators";
 
-const ModalToathuoc = ({ modal, setModal, oldToathuoc }) => {
+const ModalToathuoc = ({ modal, setModal, oldToathuoc, chitietphieukham }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const { thuocs } = useSelector((state) => state.thuoc);
@@ -55,7 +60,6 @@ const ModalToathuoc = ({ modal, setModal, oldToathuoc }) => {
     } else {
       newChitiet[index][name] = value;
     }
-
     setChitiettoathuoc(newChitiet);
   };
 
@@ -71,12 +75,12 @@ const ModalToathuoc = ({ modal, setModal, oldToathuoc }) => {
     toathuoc["chitiet"] = chitiettoathuoc;
     if (Object.keys(oldToathuoc).length === 0) {
       toathuoc["mso"] = randomMaso("tt");
-
-      dispatch(createToathuoc(toathuoc));
+      dispatch(updateTTChitietphieukham({ toathuoc, chitietphieukham }));
+      dispatch(getChitietphieukham(id));
     } else {
       dispatch(updateToathuoc(toathuoc));
+      dispatch(getChitietphieukham(id));
     }
-    console.log(toathuoc);
     setToathuoc({});
     setChitiettoathuoc([{ thuoc: "", soluong: 0 }]);
     setModal(false);

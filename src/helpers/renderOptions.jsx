@@ -10,7 +10,7 @@ const renderOptions = (options) => {
     data.push(
       <option value={item._id} key={item._id}>{`${item.mso} - ${
         item.msobn ? item.msobn : ""
-      } ${item.ten}`}</option>
+      } ${item.ten ? item.ten : ""}`}</option>
     );
   }
 
@@ -20,7 +20,7 @@ const renderOptions = (options) => {
 const convertPhieukham = (phieukham) => {
   const data = [];
   // eslint-disable-next-line array-callback-return
-  phieukham.map((item, index) => {
+  phieukham.map((item) => {
     data.push({
       _id: item._id,
       mso: item.mso,

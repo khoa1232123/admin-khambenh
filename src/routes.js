@@ -10,6 +10,8 @@ const User = React.lazy(() => import("./views/users/User"));
 const CreateUser = React.lazy(() => import("./views/users/CreateUser"));
 
 const Bacsi = React.lazy(() => import("./views/khambenh/Bacsi"));
+const DetailBacsi = React.lazy(() => import("./views/khambenh/Bacsi/Detail"));
+
 const Khoa = React.lazy(() => import("./views/khambenh/Khoa"));
 const Benhnhan = React.lazy(() => import("./views/khambenh/Benhnhan"));
 const Pdkkb = React.lazy(() => import("./views/khambenh/Pdkkb"));
@@ -62,6 +64,12 @@ const routes = [
     exact: true,
     name: "Bác sĩ",
     component: Bacsi,
+  },
+  {
+    path: "/khambenh/bacsi/:id",
+    exact: true,
+    name: "Chi tiết",
+    component: DetailBacsi,
   },
   {
     path: "/khambenh/khoa",
@@ -130,7 +138,7 @@ const routes = [
     component: Chitietphieukham,
   },
   {
-    path: "/khambenh/chitietphieukham/detail/:id",
+    path: "/khambenh/chitietphieukham/:id",
     exact: true,
     name: "Chi tiết phiếu khám",
     component: DetailChitietphieukham,

@@ -9,7 +9,6 @@ import {
   CModalFooter,
   CModalHeader,
   CModalTitle,
-  CRow,
   CSelect,
   CTextarea,
 } from "@coreui/react";
@@ -19,26 +18,18 @@ import { randomMaso } from "src/helpers";
 import { convertPhieukham, renderOptions } from "src/helpers/renderOptions";
 import {
   createChitietphieukham,
-  getBenhs,
+  getBacsis,
+  getPhieukhambenhs,
   updateChitietphieukham,
 } from "src/redux/action-creators";
-import { getBacsis } from "src/redux/action-creators/bacsiActions";
-import { getPhieukhambenhs } from "src/redux/action-creators/phieukhambenhActions";
-import { getToathuocs } from "src/redux/action-creators/toathuocActions";
 
 const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
   const dispatch = useDispatch();
 
-  const { benhs } = useSelector((state) => state.benh);
   const { phieukhambenhs } = useSelector((state) => state.phieukhambenh);
-  const { toathuocs } = useSelector((state) => state.toathuoc);
   const { bacsis } = useSelector((state) => state.bacsi);
 
-  const [chitietbenh, setChitietbenh] = useState([{}]);
-
   useEffect(() => {
-    dispatch(getBenhs());
-    dispatch(getToathuocs());
     dispatch(getBacsis());
     dispatch(getPhieukhambenhs());
   }, [dispatch]);
@@ -54,16 +45,6 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
     setChitietphieukham({ ...chitietphieukham, [name]: value });
   };
 
-  const handleChangeMulti = (e, index) => {
-    console.log(e);
-    let newChitiet = [...chitietbenh];
-    let name = e.target.name;
-    let value = e.target.value;
-    newChitiet[index][name] = value;
-
-    setChitietbenh(newChitiet);
-  };
-
   useEffect(() => {
     if (oldChitietphieukham) {
       setChitietphieukham(oldChitietphieukham);
@@ -72,11 +53,9 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
 
   const handleClick = () => {
     console.log({ chitietphieukham, oldChitietphieukham });
-    chitietphieukham["chitiet"] = chitietbenh;
     if (chitietphieukham.ten !== "") {
       if (Object.keys(oldChitietphieukham).length === 0) {
         chitietphieukham["mso"] = randomMaso("xn");
-
         dispatch(createChitietphieukham(chitietphieukham));
       } else {
         dispatch(updateChitietphieukham(chitietphieukham));
@@ -86,17 +65,13 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
     }
   };
 
-  const addBenh = () => {
-    setChitietbenh([...chitietbenh, { benh: "" }]);
-  };
-
   const closeModal = () => {
     setChitietphieukham({});
     setModal(false);
   };
 
   return (
-    <CModal show={modal} onClose={closeModal}>
+    <CModal show={modal} onClose={closeModal} size="lg">
       <CModalHeader closeButton>
         <CModalTitle>Update Chitietphieukham</CModalTitle>
       </CModalHeader>
@@ -124,26 +99,6 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
           </CFormGroup>
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Toa thuốc</CLabel>
-            </CCol>
-            <CCol xs="12" md="9">
-              <CSelect
-                id="toathuoc"
-                name="toathuoc"
-                value={
-                  (chitietphieukham.toathuoc &&
-                    chitietphieukham.toathuoc._id) ||
-                  chitietphieukham.toathuoc ||
-                  ""
-                }
-                onChange={handleChange}
-              >
-                {renderOptions(toathuocs)}
-              </CSelect>
-            </CCol>
-          </CFormGroup>
-          <CFormGroup row>
-            <CCol md="3">
               <CLabel htmlFor="text-input">Bác sĩ</CLabel>
             </CCol>
             <CCol xs="12" md="9">
@@ -159,35 +114,6 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               >
                 {renderOptions(bacsis)}
               </CSelect>
-            </CCol>
-          </CFormGroup>
-          <CFormGroup row>
-            <CCol md="3">
-              <CLabel htmlFor="text-input">Danh sách thuốc</CLabel>
-            </CCol>
-            <CCol xs="12" md="9">
-              {chitietbenh.map((item, index) => (
-                <CRow key={index}>
-                  <CCol xs="12" md="12">
-                    <CSelect
-                      name="benh"
-                      value={(item.benh && item.benh._id) || item.benh || ""}
-                      onChange={(e) => handleChangeMulti(e, index)}
-                    >
-                      {renderOptions(benhs)}
-                    </CSelect>
-                  </CCol>
-
-                  <CCol xs="12" md="12">
-                    <br />
-                  </CCol>
-                </CRow>
-              ))}
-              <CCol xs="12" md="12">
-                <CButton type="button" color="success" onClick={addBenh}>
-                  Thêm Bệnh
-                </CButton>
-              </CCol>
             </CCol>
           </CFormGroup>
           <CFormGroup row>
@@ -209,7 +135,7 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
       </CModalBody>
       <CModalFooter>
         <CButton color="primary" onClick={handleClick}>
-          Do Something
+          Submit
         </CButton>{" "}
         <CButton color="secondary" onClick={closeModal}>
           Cancel
