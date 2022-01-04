@@ -71,9 +71,6 @@ const Chitietphieukham = () => {
                   "Bác sĩ",
                   "Phiếu khám",
                   "Bệnh Nhân",
-                  // "Tên bệnh nhân",
-                  // "email",
-                  // "Số điện thoại",
                   "actions",
                 ]}
                 striped
@@ -97,6 +94,7 @@ const Chitietphieukham = () => {
                       </Link>
                     </td>
                   ),
+
                   "Phiếu khám": (item) => (
                     <td>{item.phieukhambenh && item.phieukhambenh.mso}</td>
                   ),
