@@ -54,6 +54,27 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
+    case phieukhambenhTypes.GET_PHIEUKHAMBENHBYBENHNHAN_START:
+      return {
+        phieukhambenhs: [],
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case phieukhambenhTypes.GET_PHIEUKHAMBENHBYBENHNHAN_SUCCESS:
+      return {
+        phieukhambenhs: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case phieukhambenhTypes.GET_PHIEUKHAMBENHBYBENHNHAN_FAILURE:
+      return {
+        phieukhambenhs: [],
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
     case phieukhambenhTypes.CREATE_PHIEUKHAMBENH_START:
       return {
         phieukhambenh: {},

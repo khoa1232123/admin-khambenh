@@ -80,14 +80,16 @@ const ModalPhieukhambenh = ({ modal, setModal, oldPhieukhambenh }) => {
               <CLabel htmlFor="text-input">Bệnh Nhân</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              <CSelect
-                id="hosobenhnhan"
-                name="hosobenhnhan"
-                value={phieukhambenh.hosobenhnhan || ""}
-                onChange={handleChange}
-              >
-                {renderOptions(benhnhans)}
-              </CSelect>
+              {benhnhans && (
+                <CSelect
+                  id="hosobenhnhan"
+                  name="hosobenhnhan"
+                  value={phieukhambenh.hosobenhnhan || ""}
+                  onChange={handleChange}
+                >
+                  {renderOptions(benhnhans)}
+                </CSelect>
+              )}
             </CCol>
           </CFormGroup>
 

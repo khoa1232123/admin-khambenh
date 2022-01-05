@@ -14,6 +14,9 @@ const DetailBacsi = React.lazy(() => import("./views/khambenh/Bacsi/Detail"));
 
 const Khoa = React.lazy(() => import("./views/khambenh/Khoa"));
 const Benhnhan = React.lazy(() => import("./views/khambenh/Benhnhan"));
+const DetailBenhnhan = React.lazy(() =>
+  import("./views/khambenh/Benhnhan/Detail")
+);
 const Pdkkb = React.lazy(() => import("./views/khambenh/Pdkkb"));
 const Pxnv = React.lazy(() => import("./views/khambenh/Pxnv"));
 const Lephi = React.lazy(() => import("./views/khambenh/Lephi"));
@@ -82,6 +85,12 @@ const routes = [
     exact: true,
     name: "Bệnh nhân",
     component: Benhnhan,
+  },
+  {
+    path: "/khambenh/benhnhan/:id",
+    exact: true,
+    name: "Chi tiết",
+    component: DetailBenhnhan,
   },
   {
     path: "/khambenh/phieudangkykhambenh",

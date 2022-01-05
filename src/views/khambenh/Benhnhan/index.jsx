@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { formatDate } from "src/helpers";
 import { getBenhnhans, deleteBenhnhan } from "src/redux/action-creators";
 import ModalBenhnhan from "./ModalBenhnhan";
@@ -77,8 +78,20 @@ const Benhnhan = () => {
                 itemsPerPage={10}
                 pagination
                 scopedSlots={{
-                  "Mã Số": (item) => <td>{item.mso}</td>,
-                  "Họ Tên": (item) => <td>{item.ten}</td>,
+                  "Mã Số": (item) => (
+                    <td>
+                      <Link to={"/khambenh/benhnhan/" + item._id}>
+                        {item.mso}
+                      </Link>
+                    </td>
+                  ),
+                  "Họ Tên": (item) => (
+                    <td>
+                      <Link to={"/khambenh/benhnhan/" + item._id}>
+                        {item.ten}
+                      </Link>
+                    </td>
+                  ),
                   "Số điện thoại": (item) => <td>{item.sodienthoai}</td>,
                   "Giới tính": (item) => <td>{item.gioitinh}</td>,
                   "Ngày sinh": (item) => <td>{formatDate(item.ngaysinh)}</td>,

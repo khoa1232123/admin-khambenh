@@ -100,11 +100,19 @@ const Chitietphieukham = () => {
                   ),
                   "Bệnh Nhân": (item) => (
                     <td>
-                      {item.phieukhambenh &&
-                        item.phieukhambenh.hosobenhnhan.mso}{" "}
-                      -{" "}
-                      {item.phieukhambenh &&
-                        item.phieukhambenh.hosobenhnhan.ten}
+                      <Link
+                        to={
+                          "/khambenh/benhnhan/" +
+                          (item.phieukhambenh &&
+                            item.phieukhambenh.hosobenhnhan._id)
+                        }
+                      >
+                        {item.phieukhambenh &&
+                          item.phieukhambenh.hosobenhnhan.mso}{" "}
+                        -{" "}
+                        {item.phieukhambenh &&
+                          item.phieukhambenh.hosobenhnhan.ten}
+                      </Link>
                     </td>
                   ),
                   actions: (item) => (
