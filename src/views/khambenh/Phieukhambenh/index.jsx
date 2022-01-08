@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { formatDate } from "src/helpers";
 import {
   getPhieukhambenhs,
@@ -78,7 +79,15 @@ const Phieukhambenh = () => {
                 itemsPerPage={10}
                 pagination
                 scopedSlots={{
-                  "Mã Số": (item) => <td>{item.mso}</td>,
+                  "Mã Số": (item) => (
+                    <td>
+                      <Link
+                        to={"/khambenh/phieukhambenh/" + (item && item._id)}
+                      >
+                        {item.mso}
+                      </Link>
+                    </td>
+                  ),
                   "Ngày giờ khám": (item) => (
                     <td>{formatDate(item.ngaygiokham)}</td>
                   ),

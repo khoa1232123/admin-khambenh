@@ -102,7 +102,7 @@ const ModalChitietphieukham = ({ modal, setModal, oldChitietphieukham }) => {
               <CLabel htmlFor="text-input">Bác sĩ</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              {chitietphieukham.bacsi && (
+              {bacsis && (
                 <CSelect
                   id="bacsi"
                   name="bacsi"

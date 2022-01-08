@@ -45,10 +45,13 @@ const getBenhnhanFailure = () => ({
 });
 
 const getBenhnhan = (id) => {
+  console.log(id);
   return async (dispatch) => {
     dispatch(getBenhnhanStart());
     try {
       const res = await axios.get("/hosobenhnhan/" + id);
+
+      console.log(res);
 
       dispatch(getBenhnhanSuccess(res.data));
     } catch (error) {

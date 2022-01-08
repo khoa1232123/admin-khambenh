@@ -10,30 +10,24 @@ import {
   CModalFooter,
   CModalHeader,
   CModalTitle,
-  CSelect,
   CTextarea,
 } from "@coreui/react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { formatInputDate } from "src/helpers";
 import { randomMaso } from "src/helpers";
-import { renderOptions } from "src/helpers/renderOptions";
 import {
   createPhieuxetnghiem,
-  getBenhnhans,
   updatePhieuxetnghiem,
 } from "src/redux/action-creators";
 
-const ModalPhieuxetnghiem = ({ modal, setModal, oldPhieuxetnghiem }) => {
+const ModalPhieuxetnghiem = ({
+  modal,
+  setModal,
+  oldPhieuxetnghiem,
+  benhnhan,
+}) => {
   const dispatch = useDispatch();
-
-  const { benhnhans } = useSelector((state) => state.benhnhan);
-
-  console.log(benhnhans);
-
-  useEffect(() => {
-    dispatch(getBenhnhans());
-  }, [dispatch]);
 
   const [phieuxetnghiem, setPhieuxetnghiem] = useState({});
 
@@ -80,18 +74,6 @@ const ModalPhieuxetnghiem = ({ modal, setModal, oldPhieuxetnghiem }) => {
           <CFormGroup row>
             <CCol md="3">
               <CLabel htmlFor="text-input">Bệnh Nhân</CLabel>
-            </CCol>
-            <CCol xs="12" md="9">
-              {benhnhans && (
-                <CSelect
-                  id="hosobenhnhan"
-                  name="hosobenhnhan"
-                  value={phieuxetnghiem.hosobenhnhan || ""}
-                  onChange={handleChange}
-                >
-                  {renderOptions(benhnhans)}
-                </CSelect>
-              )}
             </CCol>
           </CFormGroup>
           <CFormGroup row>

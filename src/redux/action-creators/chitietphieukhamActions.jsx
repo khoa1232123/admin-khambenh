@@ -50,9 +50,40 @@ const getChitietphieukham = (id) => {
     try {
       const res = await axios.get("/chitietphieukhambenh/" + id);
 
+      console.log(res.data);
+
       dispatch(getChitietphieukhamSuccess(res.data));
     } catch (error) {
       dispatch(getChitietphieukhamFailure());
+    }
+  };
+};
+
+// Get by phieukham
+const getPKChitietphieukhamStart = () => ({
+  type: chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_START,
+});
+
+const getPKChitietphieukhamSuccess = (chitietphieukham) => ({
+  type: chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_SUCCESS,
+  payload: chitietphieukham,
+});
+
+const getPKChitietphieukhamFailure = () => ({
+  type: chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_FAILURE,
+});
+
+const getPKChitietphieukham = (id) => {
+  return async (dispatch) => {
+    dispatch(getPKChitietphieukhamStart());
+    try {
+      const res = await axios.get("/chitietphieukhambenh/byphieukham/" + id);
+
+      console.log(res.data);
+
+      dispatch(getPKChitietphieukhamSuccess(res.data));
+    } catch (error) {
+      dispatch(getPKChitietphieukhamFailure());
     }
   };
 };
@@ -232,4 +263,5 @@ export {
   getChitietphieukham,
   updateTTChitietphieukham,
   updateDTChitietphieukham,
+  getPKChitietphieukham,
 };

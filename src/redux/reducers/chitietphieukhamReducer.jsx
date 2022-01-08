@@ -18,7 +18,6 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "",
       };
     case chitietphieukhamTypes.GET_CHITIETPHIEUKHAMS_SUCCESS:
-      // console.log("chi tiet phieu kham success");
       return {
         chitietphieukhams: payload,
         isFetching: false,
@@ -48,6 +47,28 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "Login thành công!",
       };
     case chitietphieukhamTypes.GET_CHITIETPHIEUKHAM_FAILURE:
+      return {
+        chitietphieukham: {},
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
+
+    case chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_START:
+      return {
+        chitietphieukham: {},
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_SUCCESS:
+      return {
+        chitietphieukham: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case chitietphieukhamTypes.GET_PKCHITIETPHIEUKHAM_FAILURE:
       return {
         chitietphieukham: {},
         isFetching: false,

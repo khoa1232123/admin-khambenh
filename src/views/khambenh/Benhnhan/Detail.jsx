@@ -7,7 +7,7 @@ import {
   CDataTable,
   CRow,
 } from "@coreui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { formatDate } from "src/helpers";
@@ -15,14 +15,17 @@ import {
   getBenhnhan,
   getPhieukhambenhByBenhnhan,
 } from "src/redux/action-creators";
+import ModalPhieuxetnghiem from "./ModalPhieuxetnghiem";
 
 const Detail = () => {
   const { id } = useParams();
+  const [modalPXN, setModalPXN] = useState(false);
 
   const dispatch = useDispatch();
   const { benhnhan } = useSelector((state) => state.benhnhan);
   const { phieukhambenhs } = useSelector((state) => state.phieukhambenh);
-  console.log({ benhnhan, phieukhambenhs });
+  const { phieuxetnghiems } = useSelector((state) => state.phieuxetnghiem);
+  console.log({ benhnhan, phieukhambenhs, phieuxetnghiems });
 
   useEffect(() => {
     dispatch(getBenhnhan(id));
@@ -79,7 +82,7 @@ const Detail = () => {
                   </CCol>
                 </CRow>
                 <CRow>
-                  <CCol xs={2}>Danh sách Bệnh:</CCol>
+                  <CCol xs={2}>Danh sách phiếu khám bệnh:</CCol>
                   <CCol xs={10}>
                     <CCard style={{ paddingBottom: "0px", marginTop: "20px" }}>
                       <CCardHeader
@@ -89,7 +92,40 @@ const Detail = () => {
                           alignItems: "center",
                         }}
                       >
-                        <span>Danh sách Bệnh:</span>
+                        <span>Danh sách phiếu khám bệnh:</span>
+                        <CButton color="success">Add Post</CButton>
+                      </CCardHeader>
+                      <CCardBody style={{ paddingBottom: "0px" }}>
+                        <CDataTable
+                          style={{ marginBottom: "0px" }}
+                          items={phieukhambenhs}
+                          fields={["Mã Số", "Ngày giờ khám"]}
+                          striped
+                          itemsPerPage={10}
+                          pagination
+                          scopedSlots={{
+                            "Mã Số": (item) => <td>{item.mso}</td>,
+                            "Ngày giờ khám": (item) => (
+                              <td>{item && formatDate(item.ngaygiokham)}</td>
+                            ),
+                          }}
+                        />
+                      </CCardBody>
+                    </CCard>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol xs={2}>Danh sách phiếu xét nghiệm:</CCol>
+                  <CCol xs={10}>
+                    <CCard style={{ paddingBottom: "0px", marginTop: "20px" }}>
+                      <CCardHeader
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span>Danh sách phiếu xét nghiệm:</span>
                         <CButton color="success">Add Post</CButton>
                       </CCardHeader>
                       <CCardBody style={{ paddingBottom: "0px" }}>
@@ -115,6 +151,12 @@ const Detail = () => {
             </CCard>
           </CCol>
         </CRow>
+        <ModalPhieuxetnghiem
+          modal={modalPXN}
+          setModal={setModalPXN}
+          oldPhieuxetnghiem
+          benhnhan={benhnhan}
+        />
       </>
     );
   }
