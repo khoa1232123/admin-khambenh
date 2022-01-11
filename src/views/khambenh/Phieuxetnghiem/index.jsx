@@ -79,6 +79,9 @@ const Phieuxetnghiem = () => {
                 striped
                 itemsPerPage={10}
                 pagination
+                sorter
+                hover
+                tableFilter
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
                   "Tên xét nghiệm": (item) => <td>{item.ten}</td>,

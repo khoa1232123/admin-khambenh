@@ -63,7 +63,12 @@ const ModalChitietbenh = ({
   const handleClick = () => {
     console.log(chitietbenh);
     if (Object.keys(chitietphieukham).length !== 0) {
-      dispatch(updateDTChitietphieukham({ chitietbenh, chitietphieukham }));
+      dispatch(
+        updateDTChitietphieukham({
+          chitietphieukham: { chitiet: chitietbenh },
+          ctpk_id: chitietphieukham._id,
+        })
+      );
     }
     dispatch(getChitietphieukham(id));
     setChitietbenh([{ benh: "" }]);

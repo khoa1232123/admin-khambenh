@@ -13,78 +13,80 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { randomMaso } from "src/helpers";
-import { renderOptions } from "src/helpers/renderOptions";
+import { convertPhieuDKKB, renderOptions } from "src/helpers/renderOptions";
 import {
-  createPdkkb,
-  getBenhnhans,
-  updatePdkkb,
+  createChitietphieukham,
+  getPdkkbs,
+  getPhieukhambenhs,
+  updateChitietphieukham,
 } from "src/redux/action-creators";
 
-const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
+const ModalChitietphieukham = ({ modal, setModal, bacsi }) => {
   const dispatch = useDispatch();
 
-  const { benhnhans } = useSelector((state) => state.benhnhan);
+  const { phieukhambenhs } = useSelector((state) => state.phieukhambenh);
+  const { pdkkbs } = useSelector((state) => state.pdkkb);
+
+  console.log(pdkkbs);
 
   useEffect(() => {
-    dispatch(getBenhnhans());
+    dispatch(getPhieukhambenhs());
+    dispatch(getPdkkbs());
   }, [dispatch]);
 
-  const [pdkkb, setPdkkb] = useState({});
+  console.log(phieukhambenhs);
+
+  const [chitietphieukham, setChitietphieukham] = useState({});
 
   const handleChange = (e) => {
     console.log(e);
     const name = e.target.name;
     const value = e.target.value;
-    setPdkkb({ ...pdkkb, [name]: value });
+    setChitietphieukham({ ...chitietphieukham, [name]: value });
   };
 
   useEffect(() => {
-    if (oldPdkkb) {
-      setPdkkb(oldPdkkb);
+    if (bacsi._id) {
+      setChitietphieukham({ bacsi: bacsi._id });
     }
-  }, [oldPdkkb]);
+  }, [bacsi]);
 
   const handleClick = () => {
-    console.log({ pdkkb, oldPdkkb });
-    if (pdkkb.ten !== "") {
-      if (Object.keys(oldPdkkb).length === 0) {
-        pdkkb["mso"] = randomMaso("pd");
-
-        dispatch(createPdkkb(pdkkb));
-      } else {
-        dispatch(updatePdkkb(pdkkb));
-      }
-      setPdkkb({});
-      setModal(false);
+    console.log({ chitietphieukham });
+    if (chitietphieukham) {
+      dispatch(createChitietphieukham(chitietphieukham));
+    } else {
+      dispatch(updateChitietphieukham(chitietphieukham));
     }
+    setChitietphieukham({});
+    setModal(false);
   };
 
   const closeModal = () => {
-    setPdkkb({});
+    setChitietphieukham({});
     setModal(false);
   };
 
   return (
-    <CModal show={modal} onClose={closeModal}>
+    <CModal show={modal} onClose={closeModal} size="lg">
       <CModalHeader closeButton>
-        <CModalTitle>Update Pdkkb</CModalTitle>
+        <CModalTitle>Tạo phiếu khám</CModalTitle>
       </CModalHeader>
       <CModalBody>
         <CForm action="" method="post" className="form-horizontal">
           <CFormGroup row>
             <CCol md="3">
-              <CLabel htmlFor="text-input">Hồ sơ bệnh nhân</CLabel>
+              <CLabel htmlFor="text-input">Phiếu khám bệnh</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              {benhnhans && (
+              {pdkkbs && (
                 <CSelect
                   id="hosobenhnhan"
                   name="hosobenhnhan"
-                  value={pdkkb.hosobenhnhan || ""}
+                  value={""}
                   onChange={handleChange}
                 >
-                  {renderOptions(benhnhans)}
+                  {renderOptions(convertPhieuDKKB(pdkkbs))}
                 </CSelect>
               )}
             </CCol>
@@ -93,7 +95,7 @@ const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
       </CModalBody>
       <CModalFooter>
         <CButton color="primary" onClick={handleClick}>
-          Do Something
+          Submit
         </CButton>{" "}
         <CButton color="secondary" onClick={closeModal}>
           Cancel
@@ -103,4 +105,4 @@ const ModalPdkkb = ({ modal, setModal, oldPdkkb }) => {
   );
 };
 
-export default ModalPdkkb;
+export default ModalChitietphieukham;

@@ -10,10 +10,13 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { formatDate } from "src/helpers";
+import { formatDate, randomMaso } from "src/helpers";
 import {
+  createPdkkb,
   getBenhnhan,
+  getBnPdkkb,
   getPhieukhambenhByBenhnhan,
+  getBnPhieuxetnghiem,
 } from "src/redux/action-creators";
 import ModalPhieuxetnghiem from "./ModalPhieuxetnghiem";
 
@@ -25,12 +28,26 @@ const Detail = () => {
   const { benhnhan } = useSelector((state) => state.benhnhan);
   const { phieukhambenhs } = useSelector((state) => state.phieukhambenh);
   const { phieuxetnghiems } = useSelector((state) => state.phieuxetnghiem);
-  console.log({ benhnhan, phieukhambenhs, phieuxetnghiems });
+  const { pdkkb } = useSelector((state) => state.pdkkb);
+  console.log({ pdkkb });
 
   useEffect(() => {
     dispatch(getBenhnhan(id));
     dispatch(getPhieukhambenhByBenhnhan(id));
+    dispatch(getBnPdkkb(id));
+    dispatch(getBnPhieuxetnghiem(id));
   }, [dispatch, id]);
+
+  const handleClickDKKB = () => {
+    // const newPdkkb = ;
+    if (id) {
+      dispatch(
+        createPdkkb({ mso: randomMaso("pd"), hosobenhnhan: benhnhan._id })
+      );
+      dispatch(getBnPdkkb(id));
+    }
+  };
+
   if (!benhnhan) {
     return <div>No data</div>;
   } else {
@@ -81,72 +98,80 @@ const Detail = () => {
                     {benhnhan.ngaysinh && formatDate(benhnhan.ngaysinh)}
                   </CCol>
                 </CRow>
-                <CRow>
-                  <CCol xs={2}>Danh sách phiếu khám bệnh:</CCol>
-                  <CCol xs={10}>
-                    <CCard style={{ paddingBottom: "0px", marginTop: "20px" }}>
-                      <CCardHeader
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <span>Danh sách phiếu khám bệnh:</span>
-                        <CButton color="success">Add Post</CButton>
-                      </CCardHeader>
-                      <CCardBody style={{ paddingBottom: "0px" }}>
-                        <CDataTable
-                          style={{ marginBottom: "0px" }}
-                          items={phieukhambenhs}
-                          fields={["Mã Số", "Ngày giờ khám"]}
-                          striped
-                          itemsPerPage={10}
-                          pagination
-                          scopedSlots={{
-                            "Mã Số": (item) => <td>{item.mso}</td>,
-                            "Ngày giờ khám": (item) => (
-                              <td>{item && formatDate(item.ngaygiokham)}</td>
-                            ),
-                          }}
-                        />
-                      </CCardBody>
-                    </CCard>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol xs={2}>Danh sách phiếu xét nghiệm:</CCol>
-                  <CCol xs={10}>
-                    <CCard style={{ paddingBottom: "0px", marginTop: "20px" }}>
-                      <CCardHeader
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <span>Danh sách phiếu xét nghiệm:</span>
-                        <CButton color="success">Add Post</CButton>
-                      </CCardHeader>
-                      <CCardBody style={{ paddingBottom: "0px" }}>
-                        <CDataTable
-                          style={{ marginBottom: "0px" }}
-                          items={phieukhambenhs}
-                          fields={["Mã Số", "Ngày giờ khám"]}
-                          striped
-                          itemsPerPage={10}
-                          pagination
-                          scopedSlots={{
-                            "Mã Số": (item) => <td>{item.mso}</td>,
-                            "Ngày giờ khám": (item) => (
-                              <td>{item && formatDate(item.ngaygiokham)}</td>
-                            ),
-                          }}
-                        />
-                      </CCardBody>
-                    </CCard>
-                  </CCol>
-                </CRow>
+              </CCardBody>
+            </CCard>
+
+            <CCard>
+              <CCardHeader
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span>Danh sách phiếu khám bệnh:</span>
+
+                {pdkkb && Object.keys(pdkkb).length !== 0 ? (
+                  <CButton color="danger">Đã đăng ký khám bệnh</CButton>
+                ) : (
+                  <CButton color="success" onClick={handleClickDKKB}>
+                    Đăng ký khám bệnh
+                  </CButton>
+                )}
+              </CCardHeader>
+              <CCardBody style={{ paddingBottom: "0px" }}>
+                <CDataTable
+                  style={{ marginBottom: "0px" }}
+                  items={phieukhambenhs}
+                  fields={["Mã Số", "Ngày giờ khám"]}
+                  striped
+                  itemsPerPage={10}
+                  pagination
+                  scopedSlots={{
+                    "Mã Số": (item) => <td>{item.mso}</td>,
+                    "Ngày giờ khám": (item) => (
+                      <td>{item && formatDate(item.ngaygiokham)}</td>
+                    ),
+                  }}
+                />
+              </CCardBody>
+            </CCard>
+
+            <CCard>
+              <CCardHeader
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span>Danh sách phiếu xét nghiệm:</span>
+                <CButton color="success">Add Post</CButton>
+              </CCardHeader>
+              <CCardBody style={{ paddingBottom: "0px" }}>
+                <CDataTable
+                  style={{ marginBottom: "0px" }}
+                  items={phieuxetnghiems}
+                  fields={[
+                    "Mã Số",
+                    "Ngày Xét nghiệm",
+                    "Tên xét nghiệm",
+                    "Kết quả",
+                  ]}
+                  columnFilter
+                  tableFilter
+                  striped
+                  itemsPerPage={10}
+                  pagination
+                  scopedSlots={{
+                    "Mã Số": (item) => <td>{item.mso}</td>,
+                    "Tên xét nghiệm": (item) => <td>{item.ten}</td>,
+                    "Ngày Xét nghiệm": (item) => (
+                      <td>{item && formatDate(item.ngay)}</td>
+                    ),
+                    "Kết quả": (item) => <td>{item.ketqua}</td>,
+                  }}
+                />
               </CCardBody>
             </CCard>
           </CCol>

@@ -75,6 +75,9 @@ const Vienphi = () => {
                 striped
                 itemsPerPage={10}
                 pagination
+                sorter
+                hover
+                tableFilter
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
                   "Ngày Đóng": (item) => <td>{formatDate(item.ngaydong)}</td>,

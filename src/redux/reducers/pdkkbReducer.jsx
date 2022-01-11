@@ -54,17 +54,41 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
-    case pdkkbTypes.CREATE_PDKKB_START:
+    case pdkkbTypes.GET_BNPDKKB_START:
       return {
         pdkkb: {},
         isFetching: true,
         error: false,
         message: "",
       };
-    case pdkkbTypes.CREATE_PDKKB_SUCCESS:
-      console.log(state);
+    case pdkkbTypes.GET_BNPDKKB_SUCCESS:
       return {
-        pdkkbs: payload,
+        pdkkb: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case pdkkbTypes.GET_BNPDKKB_FAILURE:
+      return {
+        pdkkb: {},
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
+
+    case pdkkbTypes.CREATE_PDKKB_START:
+      return {
+        pdkkb: {},
+        pdkkbs: [],
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case pdkkbTypes.CREATE_PDKKB_SUCCESS:
+      console.log(payload);
+      return {
+        pdkkbs: payload.pdkkbs,
+        pdkkb: payload.pdkkb,
         isFetching: false,
         error: false,
         message: "Login thành công!",
@@ -72,6 +96,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case pdkkbTypes.CREATE_PDKKB_FAILURE:
       return {
         pdkkb: {},
+        pdkkbs: [],
         isFetching: false,
         error: true,
         message: "Bạn đã nhập sai email hoặc password!",

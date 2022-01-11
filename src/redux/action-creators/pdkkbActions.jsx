@@ -57,6 +57,35 @@ const getPdkkb = (id) => {
   };
 };
 
+// Get by Benhnhan
+const getBnPdkkbStart = () => ({
+  type: pdkkbTypes.GET_BNPDKKB_START,
+});
+
+const getBnPdkkbSuccess = (pdkkb) => ({
+  type: pdkkbTypes.GET_BNPDKKB_SUCCESS,
+  payload: pdkkb,
+});
+
+const getBnPdkkbFailure = () => ({
+  type: pdkkbTypes.GET_BNPDKKB_FAILURE,
+});
+
+const getBnPdkkb = (id) => {
+  return async (dispatch) => {
+    dispatch(getBnPdkkbStart());
+    try {
+      const res = await axios.get("/phieudangkykhambenh/bybenhnhan/" + id);
+
+      console.log(res);
+
+      dispatch(getBnPdkkbSuccess(res.data));
+    } catch (error) {
+      dispatch(getBnPdkkbFailure());
+    }
+  };
+};
+
 // Create Post
 const createPdkkbStart = () => ({
   type: pdkkbTypes.CREATE_PDKKB_START,
@@ -72,6 +101,7 @@ const createPdkkbFailure = () => ({
 });
 
 const createPdkkb = (pdkkb) => {
+  console.log(pdkkb);
   return async (dispatch, getState) => {
     const {
       pdkkb: { pdkkbs },
@@ -80,9 +110,11 @@ const createPdkkb = (pdkkb) => {
     dispatch(createPdkkbStart());
     try {
       const res = await axios.post("/phieudangkykhambenh", pdkkb);
-      console.log(res);
+      console.log(res.data);
 
-      dispatch(createPdkkbSuccess([res.data, ...pdkkbs]));
+      dispatch(
+        createPdkkbSuccess({ pdkkbs: [res.data, ...pdkkbs], pdkkb: res.data })
+      );
     } catch (error) {
       dispatch(createPdkkbFailure());
     }
@@ -154,4 +186,11 @@ const updatePdkkb = (pdkkb) => {
   };
 };
 
-export { getPdkkbs, createPdkkb, deletePdkkb, updatePdkkb, getPdkkb };
+export {
+  getPdkkbs,
+  createPdkkb,
+  deletePdkkb,
+  updatePdkkb,
+  getPdkkb,
+  getBnPdkkb,
+};

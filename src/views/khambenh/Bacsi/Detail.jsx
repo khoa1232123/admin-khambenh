@@ -1,20 +1,38 @@
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
-import { useEffect } from "react";
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CDataTable,
+  CRow,
+} from "@coreui/react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { formatDate } from "src/helpers";
-import { getBacsi } from "src/redux/action-creators";
+import { getBacsi, getBSChitietphieukham } from "src/redux/action-creators";
+import ModalChitietphieukham from "./ModalChitietphieukham";
 
 const Detail = () => {
   const { id } = useParams();
 
+  const [modalCTPK, setModalCTPK] = useState(false);
+
   const dispatch = useDispatch();
   const { bacsi } = useSelector((state) => state.bacsi);
-  console.log(bacsi);
+  const { chitietphieukhams } = useSelector((state) => state.chitietphieukham);
+  console.log({ bacsi, chitietphieukhams });
 
   useEffect(() => {
     dispatch(getBacsi(id));
+    dispatch(getBSChitietphieukham(id));
   }, [dispatch, id]);
+
+  const handleClickCTKB = (e) => {
+    setModalCTPK(true);
+  };
+
   if (!bacsi) {
     return <div>No data</div>;
   } else {
@@ -71,8 +89,70 @@ const Detail = () => {
                 </CRow>
               </CCardBody>
             </CCard>
+
+            <CCard>
+              <CCardHeader
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <span>Danh sách phiếu khám bệnh:</span>
+                <CButton color="success" onClick={handleClickCTKB}>
+                  khám bệnh
+                </CButton>
+              </CCardHeader>
+              <CCardBody style={{ paddingBottom: "0px" }}>
+                <CDataTable
+                  style={{ marginBottom: "0px" }}
+                  items={chitietphieukhams}
+                  fields={[
+                    "Mã Số",
+                    "Ngày giờ khám",
+                    "Bệnh nhân",
+                    "Số điện thoại",
+                  ]}
+                  striped
+                  itemsPerPage={10}
+                  pagination
+                  scopedSlots={{
+                    "Mã Số": (item) => (
+                      <td>
+                        <Link to={"/khambenh/chitietphieukham/" + item._id}>
+                          {item.mso}
+                        </Link>
+                      </td>
+                    ),
+                    "Ngày giờ khám": (item) => (
+                      <td>
+                        {item && formatDate(item.phieukhambenh.ngaygiokham)}
+                      </td>
+                    ),
+                    "Bệnh nhân": (item) => (
+                      <td>
+                        {item &&
+                          item.phieukhambenh.hosobenhnhan.mso +
+                            " - " +
+                            item.phieukhambenh.hosobenhnhan.ten}
+                      </td>
+                    ),
+                    "Số điện thoại": (item) => (
+                      <td>
+                        {item && item.phieukhambenh.hosobenhnhan.sodienthoai}
+                      </td>
+                    ),
+                  }}
+                />
+              </CCardBody>
+            </CCard>
           </CCol>
         </CRow>
+        <ModalChitietphieukham
+          modal={modalCTPK}
+          setModal={setModalCTPK}
+          bacsi={bacsi}
+        />
       </>
     );
   }

@@ -17,6 +17,20 @@ const renderOptions = (options) => {
   return data;
 };
 
+const renderSOptions = (options) => {
+  const data = [];
+  for (const item of options) {
+    data.push({
+      value: item._id,
+      label: `${item.mso} - ${item.msobn ? item.msobn : ""} ${
+        item.ten ? item.ten : ""
+      }`,
+    });
+  }
+
+  return data;
+};
+
 const convertPhieukham = (phieukham) => {
   const data = [];
   // eslint-disable-next-line array-callback-return
@@ -31,4 +45,18 @@ const convertPhieukham = (phieukham) => {
   return data;
 };
 
-export { renderOptions, convertPhieukham };
+const convertPhieuDKKB = (pdkkbs) => {
+  const data = [];
+  // eslint-disable-next-line array-callback-return
+  pdkkbs.map((item) => {
+    data.push({
+      _id: item.hosobenhnhan._id,
+      mso: item.mso,
+      msobn: item.hosobenhnhan.mso,
+      ten: item.hosobenhnhan.ten,
+    });
+  });
+  return data;
+};
+
+export { renderOptions, convertPhieukham, renderSOptions, convertPhieuDKKB };

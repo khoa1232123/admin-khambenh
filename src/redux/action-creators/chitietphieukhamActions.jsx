@@ -88,6 +88,35 @@ const getPKChitietphieukham = (id) => {
   };
 };
 
+// Get bybacsi
+const getBSChitietphieukhamStart = () => ({
+  type: chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_START,
+});
+
+const getBSChitietphieukhamSuccess = (chitietphieukhams) => ({
+  type: chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_SUCCESS,
+  payload: chitietphieukhams,
+});
+
+const getBSChitietphieukhamFailure = () => ({
+  type: chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_FAILURE,
+});
+
+const getBSChitietphieukham = (id) => {
+  return async (dispatch) => {
+    dispatch(getBSChitietphieukhamStart());
+    try {
+      const res = await axios.get("/chitietphieukhambenh/bybacsi/" + id);
+
+      console.log(res.data);
+
+      dispatch(getBSChitietphieukhamSuccess(res.data));
+    } catch (error) {
+      dispatch(getBSChitietphieukhamFailure());
+    }
+  };
+};
+
 // Create Post
 const createChitietphieukhamStart = () => ({
   type: chitietphieukhamTypes.CREATE_CHITIETPHIEUKHAM_START,
@@ -120,7 +149,7 @@ const createChitietphieukham = (chitietphieukham) => {
   };
 };
 
-// Create Post
+// Delete Post
 const deleteChitietphieukhamStart = () => ({
   type: chitietphieukhamTypes.DELETE_CHITIETPHIEUKHAM_START,
 });
@@ -206,14 +235,14 @@ const updateDTChitietphieukhamFailure = () => ({
   type: chitietphieukhamTypes.UPDATE_DTCHITIETPHIEUKHAM_FAILURE,
 });
 
-const updateDTChitietphieukham = ({ chitietbenh, chitietphieukham }) => {
-  console.log(chitietphieukham);
+const updateDTChitietphieukham = ({ chitietphieukham, ctpk_id }) => {
+  console.log(ctpk_id);
   return async (dispatch) => {
     dispatch(updateDTChitietphieukhamStart());
     try {
       const res = await axios.put(
-        "/chitietphieukhambenh/" + chitietphieukham._id,
-        { chitiet: chitietbenh }
+        "/chitietphieukhambenh/" + ctpk_id,
+        chitietphieukham
       );
       dispatch(updateDTChitietphieukhamSuccess(res.data));
     } catch (error) {
@@ -264,4 +293,5 @@ export {
   updateTTChitietphieukham,
   updateDTChitietphieukham,
   getPKChitietphieukham,
+  getBSChitietphieukham,
 };

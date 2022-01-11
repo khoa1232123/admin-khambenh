@@ -63,7 +63,12 @@ const ModalChitietbenh = ({
   const handleClick = () => {
     console.log(chitietbenh);
     if (Object.keys(chitietphieukham).length !== 0) {
-      dispatch(updateDTChitietphieukham({ chitietbenh, chitietphieukham }));
+      dispatch(
+        updateDTChitietphieukham({
+          chitietphieukham: { chitiet: chitietbenh },
+          ctpk_id: chitietphieukham._id,
+        })
+      );
     }
     dispatch(getChitietphieukham(id));
     setChitietbenh([{ benh: "" }]);
@@ -125,7 +130,7 @@ const ModalChitietbenh = ({
               ))}
               <CCol xs="12" md="12">
                 <CButton type="button" color="success" onClick={addBenh}>
-                  Thêm thuốc
+                  Thêm Bệnh
                 </CButton>
               </CCol>
             </CCol>

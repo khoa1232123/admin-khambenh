@@ -57,6 +57,33 @@ const getPhieuxetnghiem = (id) => {
   };
 };
 
+// Get By benhnhan
+const getBnPhieuxetnghiemStart = () => ({
+  type: phieuxetnghiemTypes.GET_BNPHIEUXETNGHIEM_START,
+});
+
+const getBnPhieuxetnghiemSuccess = (phieuxetnghiems) => ({
+  type: phieuxetnghiemTypes.GET_BNPHIEUXETNGHIEM_SUCCESS,
+  payload: phieuxetnghiems,
+});
+
+const getBnPhieuxetnghiemFailure = () => ({
+  type: phieuxetnghiemTypes.GET_BNPHIEUXETNGHIEM_FAILURE,
+});
+
+const getBnPhieuxetnghiem = (id) => {
+  return async (dispatch) => {
+    dispatch(getBnPhieuxetnghiemStart());
+    try {
+      const res = await axios.get("/phieuxetnghiem/bybenhnhan/" + id);
+
+      dispatch(getBnPhieuxetnghiemSuccess(res.data));
+    } catch (error) {
+      dispatch(getBnPhieuxetnghiemFailure());
+    }
+  };
+};
+
 // Create Post
 const createPhieuxetnghiemStart = () => ({
   type: phieuxetnghiemTypes.CREATE_PHIEUXETNGHIEM_START,
@@ -167,4 +194,5 @@ export {
   deletePhieuxetnghiem,
   updatePhieuxetnghiem,
   getPhieuxetnghiem,
+  getBnPhieuxetnghiem,
 };

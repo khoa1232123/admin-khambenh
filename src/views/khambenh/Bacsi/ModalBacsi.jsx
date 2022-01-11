@@ -14,8 +14,9 @@ import {
 } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 import { formatInputDate, randomMaso } from "src/helpers";
-import { renderOptions } from "src/helpers/renderOptions";
+import { renderSOptions } from "src/helpers/renderOptions";
 import { createBacsi, getKhoas, updateBacsi } from "src/redux/action-creators";
 
 const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
@@ -35,7 +36,6 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
     const value = e.target.value;
     setBacsi({ ...bacsi, [name]: value });
   };
-  console.log(oldBacsi);
 
   useEffect(() => {
     if (oldBacsi) {
@@ -167,14 +167,20 @@ const ModalBacsi = ({ modal, setModal, oldBacsi }) => {
               <CLabel htmlFor="text-input">Khoa</CLabel>
             </CCol>
             <CCol xs="12" md="9">
-              <CSelect
-                id="khoa"
-                name="khoa"
-                value={(bacsi.khoa && bacsi.khoa._id) || ""}
-                onChange={handleChange}
-              >
-                {renderOptions(khoas)}
-              </CSelect>
+              {khoas && (
+                <Select
+                  id="khoa"
+                  name="khoa"
+                  defaultValue={
+                    bacsi.khoa &&
+                    renderSOptions(khoas).filter(
+                      (item) => item.value === bacsi.khoa._id
+                    )[0]
+                  }
+                  onChange={handleChange}
+                  options={renderSOptions(khoas)}
+                />
+              )}
             </CCol>
           </CFormGroup>
         </CForm>

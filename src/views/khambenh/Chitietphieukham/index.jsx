@@ -76,6 +76,9 @@ const Chitietphieukham = () => {
                 striped
                 itemsPerPage={10}
                 pagination
+                sorter
+                hover
+                tableFilter
                 scopedSlots={{
                   "Mã Số": (item) => (
                     <td>

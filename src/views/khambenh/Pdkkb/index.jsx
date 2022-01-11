@@ -71,6 +71,9 @@ const Pdkkb = () => {
                 striped
                 itemsPerPage={10}
                 pagination
+                sorter
+                hover
+                tableFilter
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
                   "Mã Bệnh Nhân": (item) => <td>{item.hosobenhnhan.mso}</td>,

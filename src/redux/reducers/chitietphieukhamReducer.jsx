@@ -76,6 +76,28 @@ const reducer = (state = initialState, { type, payload }) => {
         message: "Bạn đã nhập sai email hoặc password!",
       };
 
+    case chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_START:
+      return {
+        chitietphieukhams: [],
+        isFetching: true,
+        error: false,
+        message: "",
+      };
+    case chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_SUCCESS:
+      return {
+        chitietphieukhams: payload,
+        isFetching: false,
+        error: false,
+        message: "Login thành công!",
+      };
+    case chitietphieukhamTypes.GET_BSCHITIETPHIEUKHAM_FAILURE:
+      return {
+        chitietphieukhams: [],
+        isFetching: false,
+        error: true,
+        message: "Bạn đã nhập sai email hoặc password!",
+      };
+
     case chitietphieukhamTypes.CREATE_CHITIETPHIEUKHAM_START:
       return {
         chitietphieukham: {},

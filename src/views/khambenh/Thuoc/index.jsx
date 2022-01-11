@@ -64,6 +64,9 @@ const Thuoc = () => {
                 striped
                 itemsPerPage={10}
                 pagination
+                sorter
+                hover
+                tableFilter
                 scopedSlots={{
                   "Mã Số": (item) => <td>{item.mso}</td>,
                   "Tên thuốc": (item) => <td>{item.ten}</td>,

@@ -28,6 +28,7 @@ const Detail = () => {
   };
 
   const handleClickCB = () => {
+    console.log("abc");
     setModalCB(true);
   };
 
@@ -93,7 +94,7 @@ const Detail = () => {
                       >
                         <span>Danh sách Bệnh:</span>
                         <CButton color="success" onClick={handleClickCB}>
-                          Add Post
+                          Chỉnh sửa
                         </CButton>
                       </CCardHeader>
                       <CCardBody style={{ paddingBottom: "0px" }}>
